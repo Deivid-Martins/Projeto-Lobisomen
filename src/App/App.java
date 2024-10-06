@@ -12,6 +12,6 @@ public class App {
 		System.out.println(p2);
 		System.out.println(p3);
 		System.out.println(p4);
-		System.out.println(Pessoa.length);
+		System.out.println(Pessoa.pessoaLength);
 	}
 }
