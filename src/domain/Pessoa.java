@@ -1,7 +1,7 @@
 package domain;
 
 public class Pessoa {
-	public static int length = 1;
+	public static int pessoaLength = 1;
 	protected final int id;
 	protected String nome;
 	protected Status status;
@@ -9,8 +9,8 @@ public class Pessoa {
 	public Pessoa(String nome, Status status) {
 		this.nome = nome;
 		this.status = status;
-		this.id = length;
-		length++;
+		this.id = pessoaLength;
+		pessoaLength++;
 	}
 
 	@Override
