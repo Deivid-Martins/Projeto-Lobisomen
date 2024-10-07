@@ -1,6 +1,6 @@
 package domain;
 
-public class Pessoa {
+public abstract class Pessoa {
 	public static int pessoaLength = 1; // Variavel que pode ser a length, mas é usada para definir this.Id em cada usuário
 	protected final int id; // Ajuda em momentos de escolha, como na votação
 	protected String nome;
@@ -12,6 +12,8 @@ public class Pessoa {
 		this.id = pessoaLength;
 		pessoaLength++;
 	}
+	
+	public abstract String getMessageKill();
 
 	@Override
 	public String toString() {
