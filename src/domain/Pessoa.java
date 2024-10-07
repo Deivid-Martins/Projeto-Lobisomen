@@ -17,7 +17,7 @@ public abstract class Pessoa {
 
 	@Override
 	public String toString() {
-		return "Id: "+ id +"\nNome: " + nome;
+		return "Id: "+ id +"\nNome: " + nome + "\nStatus: " + status.getRelatorio();
 	}
 
 	public String getNome() {

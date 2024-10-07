@@ -31,7 +31,8 @@ public class Torturador extends Pessoa {
 				usedPower = true;
 				if (alvo instanceof Torturador) {
 					Torturador target = (Torturador) alvo;
-					System.out.println("Você arranca a pele de " + alvo.nome + " com uma faca e ele confessa que ele(a) é um(a) " + target.cargo);
+					System.out.println("Você arranca a pele de " + alvo.nome + " com uma faca e ele confessa que ele(a) é um(a) " + target.cargo + "\nApós angustiar mais um pouco, " + alvo.nome + " vem a óbito...");
+					alvo.changeStatusDead();
 				}
 			} else {
 				System.out.println("Você ja usou seu poder, bobalhão!");
