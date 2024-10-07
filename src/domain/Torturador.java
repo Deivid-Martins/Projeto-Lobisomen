@@ -25,7 +25,7 @@ public class Torturador extends Pessoa {
 	 * Função que realiza o uso do poder do torturador e revela o cargo de alguem escolhido por ele, apenas uma vez
 	 * @param alvo: Pessoa que sofrerá as consequências do Torturador
 	 */
-	public void usePower(Pessoa alvo) {
+	public void torturar(Pessoa alvo) {
 		if(alvo.status != Status.Dead) {
 			if(this.usedPower == false) {
 				usedPower = true;
