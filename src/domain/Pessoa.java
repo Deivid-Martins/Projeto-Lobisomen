@@ -13,7 +13,7 @@ public abstract class Pessoa {
 		pessoaLength++;
 	}
 	
-	public abstract String killPessoa();
+	public abstract String isDead();
 
 	@Override
 	public String toString() {

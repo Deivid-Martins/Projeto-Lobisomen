@@ -8,9 +8,10 @@ public class App {
 		Scanner input = new Scanner(System.in);
 		
 		Torturador p1 = new Torturador("Deivid", Status.Alive);
+		Torturador p2 = new Torturador("Patricio", Status.Zombie);
 		System.out.println(p1);
-		System.out.println(p1.killPessoa());
-		System.out.println(p1);
+		System.out.println(p2);
+		p1.usePower(p2);
 		
 		input.close();
 	}
