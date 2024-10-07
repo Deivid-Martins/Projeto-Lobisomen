@@ -1,16 +1,21 @@
 package domain;
 
+import java.util.Scanner;
+
 public abstract class Pessoa {
+	public Scanner input = new Scanner(System.in);
+	
 	public static int pessoaLength; // Variavel que pode ser a length, mas é usada para definir this.Id em cada usuário
 	protected final int id; // Ajuda em momentos de escolha, como na votação
 	protected String nome;
 	protected Status status; // Define se alguem ou está Vivo ou Morto, e tudo mais que for definido no enum Status
 	
-	public Pessoa(String nome, Status status) {
-		this.nome = nome;
-		this.status = status;
+	public Pessoa() {
 		pessoaLength++;
 		this.id = pessoaLength;
+		this.status = Status.Alive;
+		System.out.print("Defina o nome do jogador " + id + ": ");
+		this.nome = input.nextLine();
 	}
 	
 	public abstract String isDead();

@@ -4,10 +4,16 @@ public class Torturador extends Pessoa {
 	protected boolean usedPower = false;
 	protected String cargo;
 
-	public Torturador(String nome, Status status) {
-		super(nome, status);
+	public Torturador() {
+		super();
 		this.cargo = "Torturador";
 	}
+	
+	@Override
+	public String toString() {
+		return "Id: "+ id +"\nNome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + this.cargo;
+	}
+
 	
 	/**
 	 * changeStatusDead: troca o Status para Dead

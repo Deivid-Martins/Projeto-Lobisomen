@@ -6,7 +6,7 @@ public abstract class Tool {
 	 * @param a: Limite baixo
 	 * @param b: Limite alto
 	 * @param num: Valor informado pelo cliente
-	 * @return: se estiver entre 'a' e 'b', retorna o 'num', se não, lança uma exeção
+	 * @return: se estiver entre 'a' e 'b', retorna o 'num', se não, lança IllegalArgumentException
 	 */
 	public static int checkIntLimitado(int a, int b, int num) {
 		if(num >= a && num <= b) {
