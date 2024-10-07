@@ -13,7 +13,7 @@ public abstract class Pessoa {
 		pessoaLength++;
 	}
 	
-	public abstract String getMessageKill();
+	public abstract String killPessoa();
 
 	@Override
 	public String toString() {
@@ -32,10 +32,12 @@ public abstract class Pessoa {
 	 * Função que deixa alguem com Status == Status.Dead, apenas caso esteja viva
 	 * Se a pessoa utilizada na função ja está morta, imprime um aviso e nada ocorre além disso
 	 */
-	public void killPessoa() {
-		if(getStatus() != Status.Dead)
+	public boolean changeStatusDead() {
+		if(getStatus() != Status.Dead) {
 			this.status = Status.Dead;
-		else
-			System.out.println(nome + " ja está morto(a)...");
+			return true;
+		}
+		System.out.println(nome + " ja está morto(a)...");
+		return false;
 	}
 }
