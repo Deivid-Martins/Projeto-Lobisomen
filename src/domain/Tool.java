@@ -14,4 +14,13 @@ public abstract class Tool {
 		}
 		throw new IllegalArgumentException("Digite apenas numeros entre " + a + " e " + b);
 	}
+	
+	public static void printArrayPessoa (Pessoa[] pessoas) {
+		for(int i = 0; i < Pessoa.pessoaLength; i ++) {
+			System.out.println(pessoas[i]);
+			if(i < Pessoa.pessoaLength - 1) {
+				System.out.println("|=====-------------");
+			}
+		}
+	}
 }

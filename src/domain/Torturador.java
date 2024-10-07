@@ -8,14 +8,23 @@ public class Torturador extends Pessoa {
 		super(nome, status);
 		this.cargo = "Torturador";
 	}
-
+	
+	/**
+	 * changeStatusDead: troca o Status para Dead
+	 * return: Mensagem de imersão, onde todas as classes devem ter a sua em específico, 
+	 * 		   ou null caso não consigamos matar você hoje.
+	 */
 	@Override
 	public String isDead() {
-		if (changeStatusDead())
+		if (changeStatusDead()) // Se foi possivel fazer esta pessoa morrer, executa o bloco de comandos abaixo
 			return "De tanto torturar pessoas, o Karma bateu na sua porta <3\nO corpo de " + nome + " Foi encontrado decaptado...";
 		return null;
 	}
 	
+	/**
+	 * Função que realiza o uso do poder do torturador e revela o cargo de alguem escolhido por ele, apenas uma vez
+	 * @param alvo: Pessoa que sofrerá as consequências do Torturador
+	 */
 	public void usePower(Pessoa alvo) {
 		if(alvo.status != Status.Dead) {
 			if(this.usedPower == false) {
@@ -30,10 +39,5 @@ public class Torturador extends Pessoa {
 		} else {
 			System.out.println("Seu alvo ja está morto");
 		}
-	}
-	
-	@Override
-	public String toString() {
-		return "Pessoa\nId: "+ id +"\nNome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + cargo;
 	}
 }
