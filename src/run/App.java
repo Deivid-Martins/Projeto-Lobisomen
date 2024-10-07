@@ -13,6 +13,10 @@ public class App {
 		t1.torturar(t2);
 		System.out.println(t1);
 		System.out.println(t2);
+		
+		Detetive d1 = new Detetive("Kayke",Status.Alive);
+		System.out.println(d1.isDead());
+		
 		input.close();
 	}
 }
