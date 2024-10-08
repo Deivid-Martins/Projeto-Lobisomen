@@ -7,6 +7,7 @@ public class App {
 		Config config = new Config();
 		config.startGame();
 		
+		Tool.menuPessoas(config.getPessoas());
 		Tool.printArrayPessoa(config.getPessoas());
 	}
 }

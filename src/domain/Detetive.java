@@ -11,14 +11,18 @@ public class Detetive extends Pessoa{
 	
 	@Override
 	public String toString() {
-		return "Id: "+ id +"\nNome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + this.cargo;
+		return "Nome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + this.cargo;
 	}
 
 	@Override
 	public String isDead() {
 		if(changeStatusDead())
-			return "Após anos investigando, acabou falecendo sem ao menos descobrir quem está por trás de tudo\ndeixou sua filha para trás, isso se não tiver a esquecido de proteger, " + nome + " está morto!";
+			return getMessageDead();
 		return null;
+	}
+	
+	private String getMessageDead () {
+		return "Após anos investigando, acabou falecendo sem ao menos descobrir quem está por trás de tudo\ndeixou sua filha para trás, isso se não tiver a esquecido de proteger, " + nome + " está morto! Ele era o Detetive";
 	}
 	
 	public boolean checkFilhaAlive(Filha filha) {

@@ -11,7 +11,7 @@ public class Torturador extends Pessoa {
 	
 	@Override
 	public String toString() {
-		return "Id: "+ id +"\nNome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + this.cargo;
+		return "Nome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + this.cargo;
 	}
 
 	
@@ -23,8 +23,12 @@ public class Torturador extends Pessoa {
 	@Override
 	public String isDead() {
 		if (changeStatusDead()) // Se foi possivel fazer esta pessoa morrer, executa o bloco de comandos abaixo
-			return "De tanto torturar pessoas, o Karma bateu na sua porta <3\nO corpo de " + nome + " Foi encontrado decaptado...";
+			return getMessageDead();
 		return null;
+	}
+	
+	private String getMessageDead () {
+		return "De tanto torturar pessoas, o Karma bateu na sua porta <3\nO corpo de " + nome + " Foi encontrado decaptado, ele tinha se tornado um Torturador...";
 	}
 	
 	/**
