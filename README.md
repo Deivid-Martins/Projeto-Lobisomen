@@ -11,7 +11,7 @@ Este é um projeto universitário desenvolvido como parte de uma disciplina de C
 
 ## Visão Geral
 
-Este projeto é uma versão simplificada do jogo *Wolvesville*, onde jogadores assumem papéis diferentes e devem trabalhar juntos ou contra outros para vencer o jogo. Cada jogador pode ser parte de uma equipe ou ser um lobo solitário (traidor), e o objetivo é sobreviver até o fim.
+Este projeto é uma versão alternativa do jogo *Wolvesville*, onde jogadores assumem papéis diferentes e devem trabalhar juntos ou contra outros para vencer o jogo. Cada jogador ou será parte de uma equipe ou será uma Bruxa (traidor), e o objetivo é sobreviver até descobrir quem é a Bruxa, ou até a Bruxa acabar com tudo.
 
 O projeto visa demonstrar o uso de conceitos avançados de Java, como classes abstratas, métodos estáticos, enumeradores (enum) e modificadores de acesso como `final`.
 
