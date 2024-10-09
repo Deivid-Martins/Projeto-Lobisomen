@@ -9,53 +9,48 @@ public class Config {
 	
 	private Pessoa[] pessoas;
 	
-	/**
-	 * Função onde inicia absolutamente tudo na main, nada além disso deve ser executado na mais, aqui deve
-	 * conter todas as regras para o funcionamento planejado
-	 */
-	public void startGame() {
-		System.out.println("-----===| \"Werewolf\" |===-----");
-		System.out.print("Defina a quantia de jogadores: ");
-		int pessoasLength = input.nextInt();
-		if(pessoasLength <= 5) {
-			System.out.println("Com essa quantia, melhor nem jogar mesmo.\nVá pra casa, vá");
-		} else if (pessoasLength <= 8) {
-			int detetives = 1, torturadores = 1;
-			setFunctions(detetives, torturadores, pessoasLength);
-		}
+	private String getIntroducao() {
+		return "Neste jogo o vilão é a bruxa, até o momento, não contaremos nada sobre oque cada classe faz,\n"
+			 + "porém, cada pessoa receberá um resumo sobre como sua classe funcionará, peço que falem apenas\n"
+			 + "no turno da noite, e outro aviso, os Aldeões, que são os \"Inocentes\" também receberão tarefas\n"
+			 + "a noite, mas peço para que nenhum conte oque é, na segunda rodadas explicaremos como todas as\n"
+			 + "categorias funcionam, então é isso, boa sorte a todos.";
 	}
-	/**
-	 * Função que randomiza os cargos a depender do tamanho de jogadores
-	 * @param detetives: quantia de detetives que devem existir
-	 * @param torturadores: quantia de torturadores que devem existir
-	 * @param pessoasLength: quantia de Pessoas participando
-	 */
-	public void setFunctions(int detetives, int torturadores, int pessoasLength) {
-		this.pessoas = new Pessoa[pessoasLength];
-		for(int i = 0; i < pessoasLength; i ++) {
-			if(detetives > 0 || torturadores > 0) {
-				int indexRandom = random.nextInt(3);
-				switch(indexRandom) {
+	
+	private boolean pessoaStillNull() {
+		for(int i = 0; i < this.pessoas.length; i ++) {
+			if(pessoas[i] == null)
+				return true;
+		}
+		return false;
+	}
+	
+	private void defCargos(int pessoaLength, int detetives) {
+		int filha = detetives;
+		int index;
+		int classe;
+		while(pessoaStillNull()) {
+			index = random.nextInt(0, pessoaLength);
+			classe = random.nextInt(0, 2);
+			if(this.pessoas[index] == null) {
+				switch(classe) {
 					case 0:
-						this.pessoas[i] = new Detetive();
-						if(this.pessoas[i+1] != null) {
-							this.pessoas[1+1] = new Filha();
-						} else if (this.pessoas[i-1] != null) {
-							if (this.pessoas[i-1] instanceof Aldeao) {
-							this.pessoas[i-1] = new Filha();
+						if(detetives > 0) {
+							this.pessoas[index] = new Detetive();
+							detetives--;
+							for(int i = 0; i < this.pessoas.length; i ++) {
+								if(pessoas[i] == null && filha > 0) {
+									this.pessoas[i] = new Filha();
+									filha --;
+								}
 							}
 						}
-						detetives--;
 						break;
 					case 1:
-						this.pessoas[i] = new Torturador();
-						torturadores--;
-						break;
-					case 2:
-						this.pessoas[i] = new Aldeao();
+						this.pessoas[index] = new Aldeao();
 						break;
 					default:
-						System.out.println("Erro inesperado, cheque até aonde o random está indo\ne olhe se adicionou a nova classe neste switch!");
+						System.out.println("|| ERRO INESPERADO ||");
 				}
 			}
 		}
@@ -63,5 +58,46 @@ public class Config {
 	
 	public Pessoa[] getPessoas () {
 		return this.pessoas;
+	}
+	
+	public int intInputLimitado(int limiteBaixo, int limiteAlto){
+		int opc; // Opção escolhida pelo usuário
+		do {
+			System.out.print("Informe um número: "); // Prompt
+			opc = input.nextInt(); // Guarda a categoria
+			
+			// Caso seja um número inválido
+			if(opc < limiteBaixo || opc > limiteAlto) 
+			{ 
+				System.out.printf("Digite um número válido! Só pode entre %d e %d!\n", limiteBaixo, limiteAlto);
+			}
+		} while(opc < limiteBaixo || opc > limiteAlto);
+		return opc;
+	}
+	
+	/**
+	 * Função onde inicia absolutamente tudo na main, nada além disso deve ser executado na mais, aqui deve
+	 * conter todas as regras para o funcionamento planejado
+	 */
+	public void startGame() {
+		System.out.println("                               -----===| \"Werewolf\" |===-----");
+		System.out.println(getIntroducao());
+		System.out.print("Defina a quantia de jogadores: ");
+		int pessoasLength = input.nextInt();
+		if(pessoasLength <= 4) {
+			System.out.println("Vai ter nem graça com esse tanto de gente\nvá pra casa vá.");
+		} else if (pessoasLength <= 8) {
+			this.pessoas = new Pessoa[pessoasLength];
+			int detetives = 1;
+			defCargos(pessoasLength, detetives);
+		} else if (pessoasLength <= 15) {
+			this.pessoas = new Pessoa[pessoasLength];
+			int detetives = 1;
+			defCargos(pessoasLength, detetives);
+		} else {
+			this.pessoas = new Pessoa[pessoasLength];
+			int detetives = 1;
+			defCargos(pessoasLength, detetives);
+		}
 	}
 }
