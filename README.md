@@ -7,6 +7,7 @@ Este é um projeto universitário desenvolvido como parte de uma disciplina de C
 - [Visão Geral](#visão-geral)
 - [Funcionalidades](#funcionalidades)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Tecnologias Previstas](#Tecnologias Previstas)
 
 ## Visão Geral
 
@@ -29,3 +30,6 @@ O projeto visa demonstrar o uso de conceitos avançados de Java, como classes ab
   - **Métodos Estáticos**: Para funções utilitárias, como cálculo de votos.
   - **Enums**: Para definir os diferentes papéis no jogo.
   - **Modificador Final**: Para garantir que certas classes ou métodos não possam ser modificados.
+ 
+## Tecnologias Previstas
+ ![Imagem do WhatsApp de 2024-10-09 à(s) 10 27 51_1fe2250b](https://github.com/user-attachments/assets/146e8221-0849-4cee-adaf-d12c67746a4d)
