@@ -7,7 +7,7 @@ Este é um projeto universitário desenvolvido como parte de uma disciplina de C
 - [Visão Geral](#visão-geral)
 - [Funcionalidades](#funcionalidades)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
-- [Tecnologias Previstas](#Tecnologias Previstas)
+- [Tecnologias Previstas](#Tecnologias-Previstas)
 
 ## Visão Geral
 
