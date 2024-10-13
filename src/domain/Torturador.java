@@ -7,6 +7,16 @@ public class Torturador extends Pessoa {
 	public Torturador() {
 		super();
 		this.cargo = "Torturador";
+		this.deathMessages = new String[4];
+		defineDeathMessages();
+	}
+	
+	@Override
+	public void defineDeathMessages() {
+		deathMessages[0] = "Eu lutei tanto...e mesmo assim...";
+		deathMessages[1] = "Filha... não sou o herói que você pensou,\nmas ainda assim lutei por você até o fim.";
+		deathMessages[2] = "Tanto sangue... Eu sabia que ia me afogar uma hora...";
+		deathMessages[3] = "Eles falam... todos falam... e mesmo assim...";
 	}
 	
 	@Override

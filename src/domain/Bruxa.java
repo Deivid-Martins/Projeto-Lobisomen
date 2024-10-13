@@ -4,12 +4,23 @@ public class Bruxa extends Pessoa{
 	protected boolean usedPowerTonight;
 	protected String cargo;
 	
-	
-
 	public Bruxa() {
 		super();
 		this.usedPowerTonight = false;
 		this.cargo = "Bruxa";
+		this.deathMessages = new String[8];
+	}
+
+	@Override
+	public void defineDeathMessages() {
+		deathMessages[0] = "Pois a Noite é Escura e Cheia de Terrores.";
+		deathMessages[1] = "Eu queimaria o mundo por ele...";
+		deathMessages[2] = "Sinto muito pequeno...a mamãe não pode te seguir...";
+		deathMessages[3] = "Desculpe, meu pequeno... mamãe não pode seguir você desta vez...";
+		deathMessages[4] = "Deixe queimar...";
+		deathMessages[5] = "Como fosforo em meio a queimada.";
+		deathMessages[6] = "Vocês queimam as formigas, enquanto o formigueiro os devora";
+		deathMessages[7] = "Queimar... não mudará nada... a noite continua escura...";
 	}
 	
 	@Override

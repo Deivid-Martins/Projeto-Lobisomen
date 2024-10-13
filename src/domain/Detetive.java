@@ -3,10 +3,23 @@ package domain;
 public class Detetive extends Pessoa{
 	protected boolean usedPower = false;
 	protected String cargo;
+	protected Filha filha;
 	
 	public Detetive() {
 		super();
 		this.cargo = "Detetive";
+		this.deathMessages = new String[4];
+		if(filha != null) {
+			defineDeathMessages();
+		}
+	}
+	
+	@Override
+	public void defineDeathMessages() {
+		deathMessages[0] = "Seja forte minha querida " + filha.getNome() + ", por mim... por nós";
+		deathMessages[1] = "Seja uma boa garota, como sempre, ok?";
+		deathMessages[2] = "Eu prometo, filha... ainda te verei crescer, só um pouco mais de longe.";
+		deathMessages[3] = "Minha garotinha...não se preocupe...quando sentires só, olhe\npara as estrelas, e eu a olharei de volta...eu juro.";
 	}
 	
 	@Override

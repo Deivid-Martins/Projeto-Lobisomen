@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public abstract class Pessoa {
@@ -8,6 +9,7 @@ public abstract class Pessoa {
 	protected String nome;
 	protected Status status; // Define se alguem ou está Vivo ou Morto, e tudo mais que for definido no enum Status
 	protected int votos;
+	protected String[] deathMessages;
 	
 	public Pessoa() {
 		this.status = Status.Alive;
@@ -16,6 +18,7 @@ public abstract class Pessoa {
 	}
 	
 	public abstract String isDead();
+	public abstract void defineDeathMessages();
 
 	@Override
 	public String toString() {
@@ -28,6 +31,14 @@ public abstract class Pessoa {
 
 	public Status getStatus() {
 		return status;
+	}
+	
+	public String randomDeathMessage() {
+		Random random = new Random();
+		int index = random.nextInt(0, this.deathMessages.length);
+		if(this.deathMessages[index] != null)
+			return this.deathMessages[index];
+		return null;
 	}
 	
 	/**
