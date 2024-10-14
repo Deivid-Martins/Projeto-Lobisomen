@@ -38,9 +38,18 @@ public class Config {
 						if(detetives > 0) {
 							this.pessoas[index] = new Detetive();
 							detetives--;
+							int saveDadIndex = index;
 							for(int i = 0; i < this.pessoas.length; i ++) {
 								if(pessoas[i] == null && filha > 0) {
 									this.pessoas[i] = new Filha();
+									if (this.pessoas[i] instanceof Filha && this.pessoas[saveDadIndex] instanceof Detetive) {
+										Filha f = (Filha) this.pessoas[i];
+										Detetive p = (Detetive) this.pessoas[saveDadIndex];
+										f.defineDad(p);
+										p.defineDaughter(f);
+										f.defineDeathMessages();
+										p.defineDeathMessages();
+									}
 									filha --;
 								}
 							}

@@ -24,7 +24,7 @@ public class Detetive extends Pessoa{
 	
 	@Override
 	public String toString() {
-		return "Nome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + this.cargo;
+		return "Nome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + this.cargo + "\nFilha nome: " + filha.getNome();
 	}
 
 	@Override
@@ -43,5 +43,9 @@ public class Detetive extends Pessoa{
 			return false;
 		}
 		return true;
+	}
+	
+	protected void defineDaughter (Filha filha) {
+		this.filha = filha;
 	}
 }

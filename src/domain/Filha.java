@@ -2,7 +2,7 @@ package domain;
 
 public class Filha extends Pessoa {
 	protected String cargo;
-	public Detetive pai;
+	protected Detetive pai;
 	
 	public Filha() {
 		super();
@@ -27,7 +27,7 @@ public class Filha extends Pessoa {
 	
 	@Override
 	public String toString() {
-		return "Nome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + this.cargo;
+		return "Nome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + this.cargo + "\nPai nome: " + pai.getNome();
 	}
 
 	@Override
@@ -40,5 +40,9 @@ public class Filha extends Pessoa {
 	
 	private String getMessageDead () {
 		return "Você era muito fraco, e seu pai ainda mais, ele não cumpriu a promessa\nde se livrar desta criatura a tempo, " + nome + " junta-se aos mortos, ela era a Filha do Detetive";
+	}
+	
+	protected void defineDad(Detetive pai) {
+		this.pai = pai;
 	}
 }
