@@ -1,12 +1,15 @@
 package domain;
 
+import java.util.Random;
+
 public class Aldeao extends Pessoa{
-	protected String cargo;
+	private Random random = new Random();
 	
 	public Aldeao() {
 		super();
 		this.cargo = "Aldeão";
 		this.deathMessages = new String[6];
+		defineDeathMessages();
 	}
 
 	@Override
@@ -23,16 +26,17 @@ public class Aldeao extends Pessoa{
 	public String toString() {
 		return "Nome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + cargo;
 	}
-
-	@Override
-	public String isDead() {
-		if(changeStatusDead()) {
-			return getMessageDead();
-		}
-		return null;
-	}
 	
-	private String getMessageDead() {
-		return "Que interessante, um cara qualquer morreu, que diferença isso faz?\n" + nome + " está morto, ele era um Aldeão";
+	public void menu() {
+		int res = 0;
+		int num = random.nextInt(100, 900);
+		System.out.println("CAPTCHA\nDigite " + num + " abaixo para verificar se você está vivo:");
+		while(res != num) {
+			res = input.nextInt();
+			if(res != num) {
+				System.out.println("Errado, digite " + num + " corretamente:");
+			}
+		}
+		System.out.println("CAPTCHA confirmado, volte para o seu lugar em silêncio.");
 	}
 }

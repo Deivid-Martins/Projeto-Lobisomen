@@ -1,7 +1,10 @@
 package domain;
 
+import java.util.Random;
+
 public class Filha extends Pessoa {
-	protected String cargo;
+	private Random random = new Random();
+	
 	protected Detetive pai;
 	
 	public Filha() {
@@ -29,20 +32,21 @@ public class Filha extends Pessoa {
 	public String toString() {
 		return "Nome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + this.cargo + "\nPai nome: " + pai.getNome();
 	}
-
-	@Override
-	public String isDead() {
-		if(changeStatusDead()) {
-			return getMessageDead();
-		}
-		return null;
-	}
-	
-	private String getMessageDead () {
-		return "Você era muito fraco, e seu pai ainda mais, ele não cumpriu a promessa\nde se livrar desta criatura a tempo, " + nome + " junta-se aos mortos, ela era a Filha do Detetive";
-	}
 	
 	protected void defineDad(Detetive pai) {
 		this.pai = pai;
+	}
+	
+	public void menu() {
+		int res = 0;
+		int num = random.nextInt(100, 900);
+		System.out.println("CAPTCHA\nDigite " + num + " abaixo para verificar se você está vivo:");
+		while(res != num) {
+			res = input.nextInt();
+			if(res != num) {
+				System.out.println("Errado, digite " + num + " corretamente:");
+			}
+		}
+		System.out.println("CAPTCHA confirmado, volte para o seu lugar em silêncio.");
 	}
 }

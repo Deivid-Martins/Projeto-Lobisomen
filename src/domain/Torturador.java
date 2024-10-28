@@ -2,7 +2,6 @@ package domain;
 
 public class Torturador extends Pessoa {
 	protected boolean usedPower = false;
-	protected String cargo;
 
 	public Torturador() {
 		super();
@@ -23,23 +22,6 @@ public class Torturador extends Pessoa {
 	public String toString() {
 		return "Nome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + this.cargo;
 	}
-
-	
-	/**
-	 * changeStatusDead: troca o Status para Dead
-	 * return: Mensagem de imersão, onde todas as classes devem ter a sua em específico, 
-	 * 		   ou null caso não consigamos matar você hoje.
-	 */
-	@Override
-	public String isDead() {
-		if (changeStatusDead()) // Se foi possivel fazer esta pessoa morrer, executa o bloco de comandos abaixo
-			return getMessageDead();
-		return null;
-	}
-	
-	private String getMessageDead () {
-		return "De tanto torturar pessoas, o Karma bateu na sua porta <3\nO corpo de " + nome + " Foi encontrado decaptado, ele tinha se tornado um Torturador...";
-	}
 	
 	/**
 	 * Função que realiza o uso do poder do torturador e revela o cargo de alguem escolhido por ele, apenas uma vez
@@ -52,13 +34,30 @@ public class Torturador extends Pessoa {
 				if (alvo instanceof Torturador) {
 					Torturador target = (Torturador) alvo;
 					System.out.println("Você arranca a pele de " + alvo.nome + " com uma faca e ele confessa que ele(a) é um(a) " + target.cargo + "\nApós angustiar mais um pouco, " + alvo.nome + " vem a óbito...");
-					alvo.changeStatusDead();
+					alvo.status = Status.Dying;
 				}
 			} else {
 				System.out.println("Você ja usou seu poder, bobalhão!");
 			}
 		} else {
 			System.out.println("Seu alvo ja está morto");
+		}
+	}
+	
+	public void menu(Pessoa alvo) {
+		System.out.println("[1] - Torturar\n[0] - Cancelar");
+		int opc = 1;
+		while(opc != 0) {
+			opc = input.nextInt();
+			switch(opc) {
+				case 1:
+					torturar(alvo);
+					break;
+				case 0:
+					break;
+				default:
+					System.out.println("Opção inexistente");
+			}
 		}
 	}
 }

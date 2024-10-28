@@ -10,6 +10,7 @@ public abstract class Pessoa implements AllClassesContract {
 	protected Status status; // Define se alguem ou está Vivo ou Morto, e tudo mais que for definido no enum Status
 	protected int votos;
 	protected String[] deathMessages;
+	protected String cargo;
 	
 	public Pessoa() {
 		this.status = Status.Alive;
@@ -38,6 +39,14 @@ public abstract class Pessoa implements AllClassesContract {
 		return null;
 	}
 	
+	@Override
+	public String isDead() {
+		if (changeStatusDead()) // Se foi possivel fazer esta pessoa morrer, executa o bloco de comandos abaixo
+			return randomDeathMessage();
+		return null;
+	}
+	
+	
 	/**
 	 * Função que deixa alguem com Status == Status.Dead, apenas caso esteja viva
 	 * Se a pessoa utilizada na função ja está morta, imprime um aviso e nada ocorre além disso
@@ -45,11 +54,15 @@ public abstract class Pessoa implements AllClassesContract {
 	 * ATENÇÃO, esta função jamais deve ser utilizada para matar uma pessoa, ela é utilizada na função especifica da classe
 	 */
 	protected boolean changeStatusDead() {
-		if(getStatus() != Status.Dead) {
+		if(getStatus() == Status.Dying) {
 			this.status = Status.Dead;
 			return true;
-		}
-		System.out.println(nome + " ja está morto(a)...");
+		} else if (getStatus() == Status.Dead)
+			System.out.println(nome + " ja está morto(a)...");
+		else if (getStatus() == Status.Alive)
+			System.out.println("Essa pessoa ainda não esta morrendo");
+		else if (getStatus() == Status.Blessed)
+			System.out.println("Essa pessoa está abençoada nessa rodada");
 		return false;
 	}
 }

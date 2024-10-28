@@ -2,13 +2,15 @@ package domain;
 
 public class Bruxa extends Pessoa{
 	protected boolean usedPowerTonight;
-	protected String cargo;
+	protected boolean tonta;
 	
 	public Bruxa() {
 		super();
 		this.usedPowerTonight = false;
+		this.tonta = false;
 		this.cargo = "Bruxa";
 		this.deathMessages = new String[8];
+		defineDeathMessages();
 	}
 
 	@Override
@@ -27,24 +29,41 @@ public class Bruxa extends Pessoa{
 	public String toString() {
 		return "Nome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + cargo;
 	}
-
-	@Override
-	public String isDead() {
-		return "Que azar, alguém que deveria ser tão forte, mas que pelo sorteio, caiu com\n"
-			+  "uma pessoa tao fraca, festejem, pois a Bruxa " + nome + " acaba de falecer!";
-	}
 	
 	public void killSomeone(Pessoa alvo) {
 		if(alvo.status != Status.Dead) {
 			if(this.usedPowerTonight == false) {
-				usedPowerTonight = true;
-				System.out.println("Você agarra " + alvo.nome + " pelo pescoço e o joga em uma piscina de ácido.");
-				alvo.changeStatusDead();
+				if(!(alvo instanceof Leproso)) {
+					usedPowerTonight = true;
+					System.out.println("Você agarra " + alvo.nome + " pelo pescoço e o joga em uma piscina de ácido.");
+					alvo.status = Status.Dying;
+				} else {
+					usedPowerTonight = true;
+					System.out.println("Você agarra " + alvo.nome + " pelo pescoço e o joga em uma piscina de ácido.\nEle tinha lepra, consequências ocorrerão na proxima noite!");
+					alvo.status = Status.Dying;
+				}
 			} else {
 				System.out.println("Você ja usou seu poder, querida");
 			}
 		} else {
 			System.out.println("Esta pessoa ja morreu");
+		}
+	}
+	
+	public void menu(Pessoa alvo) {
+		System.out.println("[1] - Matar\n[0] - Cancelar");
+		int opc = 1;
+		while(opc != 0) {
+			opc = input.nextInt();
+			switch(opc) {
+				case 1:
+					killSomeone(alvo);
+					break;
+				case 0:
+					break;
+				default:
+					System.out.println("Opção inexistente");
+			}
 		}
 	}
 }

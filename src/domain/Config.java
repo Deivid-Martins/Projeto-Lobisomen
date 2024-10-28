@@ -17,7 +17,7 @@ public class Config {
 			 + "categorias funcionam, então é isso, boa sorte a todos.";
 	}
 	
-	private boolean pessoaStillNull() {
+	private boolean pessoasStillNull() {
 		for(int i = 0; i < this.pessoas.length; i ++) {
 			if(pessoas[i] == null)
 				return true;
@@ -25,19 +25,61 @@ public class Config {
 		return false;
 	}
 	
-	private void defCargos(int pessoaLength, int detetives) {
-		int filha = detetives;
+	private boolean pessoasHaveDetetive() {
+		for(int i = 0; i < this.pessoas.length; i ++) {
+			if(pessoas[i] instanceof Detetive)
+				return true;
+		}
+		return false;
+	}
+	
+	private int pessoasHaveAllBruxa() {
+		int quant = 0;
+		for(int i = 0; i < this.pessoas.length; i ++) {
+			if(pessoas[i] instanceof Bruxa)
+				quant++;
+		}
+		return quant;
+	}
+	
+	private int pessoasHaveAllPadre() {
+		int quant = 0;
+		for(int i = 0; i < this.pessoas.length; i ++) {
+			if(pessoas[i] instanceof Padre)
+				quant++;
+		}
+		return quant;
+	}
+	
+	private int pessoasHaveAllLeproso() {
+		int quant = 0;
+		for(int i = 0; i < this.pessoas.length; i ++) {
+			if(pessoas[i] instanceof Leproso)
+				quant++;
+		}
+		return quant;
+	}
+	
+	private void defCargos(int pessoaLength, int bruxa, int detetive, int padre, int leproso) {
+		int filha = detetive;
 		int index;
-		int classe;
-		while(pessoaStillNull()) {
+		int classe = 0;
+		while((!pessoasHaveDetetive()) || pessoasHaveAllBruxa() != bruxa || pessoasHaveAllPadre() != padre || pessoasHaveAllLeproso() != leproso) {
+			if(!pessoasHaveDetetive())
+				classe = 0;
+			else if(pessoasHaveAllBruxa() != bruxa)
+				classe = 1;
+			else if(pessoasHaveAllPadre() != padre)
+				classe = 2;
+			else if(pessoasHaveAllLeproso() != leproso)
+				classe = 3;
 			index = random.nextInt(0, pessoaLength);
-			classe = random.nextInt(0, 2);
 			if(this.pessoas[index] == null) {
 				switch(classe) {
 					case 0:
-						if(detetives > 0) {
+						if(detetive > 0) {
 							this.pessoas[index] = new Detetive();
-							detetives--;
+							detetive--;
 							int saveDadIndex = index;
 							for(int i = 0; i < this.pessoas.length; i ++) {
 								if(pessoas[i] == null && filha > 0) {
@@ -56,10 +98,23 @@ public class Config {
 						}
 						break;
 					case 1:
-						this.pessoas[index] = new Aldeao();
+						this.pessoas[index] = new Bruxa();
+						break;
+					case 2:
+						this.pessoas[index] = new Padre();
+						break;
+					case 3:
+						this.pessoas[index] = new Leproso();
 						break;
 					default:
 						System.out.println("|| ERRO INESPERADO ||");
+				}
+			}
+		}
+		if(pessoasStillNull()) {
+			for(int i = 0; i < pessoas.length; i ++) {
+				if(this.pessoas[i] == null) {
+					this.pessoas[i] = new Aldeao();
 				}
 			}
 		}
@@ -89,7 +144,7 @@ public class Config {
 	 * conter todas as regras para o funcionamento planejado
 	 */
 	public void startGame() {
-		System.out.println("                               -----===| \"Werewolf\" |===-----");
+		System.out.println("Bem Vindo a Aldeia");
 		System.out.println(getIntroducao());
 		System.out.print("Defina a quantia de jogadores: ");
 		int pessoasLength = input.nextInt();
@@ -97,16 +152,25 @@ public class Config {
 			System.out.println("Vai ter nem graça com esse tanto de gente\nvá pra casa vá.");
 		} else if (pessoasLength <= 8) {
 			this.pessoas = new Pessoa[pessoasLength];
-			int detetives = 1;
-			defCargos(pessoasLength, detetives);
+			int bruxa = 1;
+			int detetive = 1;
+			int padre = 1;
+			int leproso = 1;
+			defCargos(pessoasLength, bruxa, detetive, padre, leproso);
 		} else if (pessoasLength <= 15) {
 			this.pessoas = new Pessoa[pessoasLength];
-			int detetives = 1;
-			defCargos(pessoasLength, detetives);
+			int bruxa = 2;
+			int detetive = 1;
+			int padre = 2;
+			int leproso = 2;
+			defCargos(pessoasLength, bruxa, detetive, padre, leproso);
 		} else {
 			this.pessoas = new Pessoa[pessoasLength];
-			int detetives = 1;
-			defCargos(pessoasLength, detetives);
+			int bruxa = 3;
+			int detetive = 1;
+			int padre = 3;
+			int leproso = 4;
+			defCargos(pessoasLength, bruxa, detetive, padre, leproso);
 		}
 	}
 }
