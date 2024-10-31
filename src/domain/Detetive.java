@@ -16,7 +16,7 @@ public class Detetive extends Pessoa{
 	
 	@Override
 	public void defineDeathMessages() {
-		deathMessages[0] = "Seja forte minha querida " + filha.getNome() + ", por mim... por nós";
+		deathMessages[0] = "Seja forte minha querida filha, por mim... por nós";
 		deathMessages[1] = "Seja uma boa garota, como sempre, ok?";
 		deathMessages[2] = "Eu prometo, filha... ainda te verei crescer, só um pouco mais de longe.";
 		deathMessages[3] = "Minha garotinha...não se preocupe...quando sentires só, olhe\npara as estrelas, e eu a olharei de volta...eu juro.";
@@ -59,6 +59,7 @@ public class Detetive extends Pessoa{
 			switch(opc) {
 				case 1:
 					investigar(alvo);
+					opc = 0;
 					break;
 				case 0:
 					break;

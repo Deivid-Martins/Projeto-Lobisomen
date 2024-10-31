@@ -33,14 +33,12 @@ public class Bruxa extends Pessoa{
 	public void killSomeone(Pessoa alvo) {
 		if(alvo.status != Status.Dead) {
 			if(this.usedPowerTonight == false) {
-				if(!(alvo instanceof Leproso)) {
-					usedPowerTonight = true;
+				if(!(alvo.status == Status.Blessed)) {
 					System.out.println("Você agarra " + alvo.nome + " pelo pescoço e o joga em uma piscina de ácido.");
-					alvo.status = Status.Dying;
-				} else {
-					usedPowerTonight = true;
-					System.out.println("Você agarra " + alvo.nome + " pelo pescoço e o joga em uma piscina de ácido.\nEle tinha lepra, consequências ocorrerão na proxima noite!");
-					alvo.status = Status.Dying;
+					if(!(alvo instanceof Leproso)) {
+						usedPowerTonight = true;
+						alvo.status = Status.Dying;
+					}
 				}
 			} else {
 				System.out.println("Você ja usou seu poder, querida");
@@ -58,6 +56,7 @@ public class Bruxa extends Pessoa{
 			switch(opc) {
 				case 1:
 					killSomeone(alvo);
+					opc = 0;
 					break;
 				case 0:
 					break;
@@ -73,6 +72,8 @@ public class Bruxa extends Pessoa{
 			 + "Seu papel é matar a todos até que não reste mais\n"
 			 + "participantes, toda a noite você poderá matar uma\n"
 			 + "pessoa, mas cuidado com as consequências ao matar\n"
-			 + "certas pessoas...";
+			 + "certas pessoas...\n"
+			 + "Alguma(s) vez(es) sua vítima pode acabar ficando viva,\n"
+			 + "talvez seja um milagre...";
 	}
 }

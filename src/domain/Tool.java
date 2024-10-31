@@ -13,8 +13,7 @@ public abstract class Tool {
 	
 	public static void menuPessoas(Pessoa[] pessoas) {
 		if(pessoas != null) {
-			for(int i = 0; i < pessoas.length; i++) 
-			{
+			for(int i = 0; i < pessoas.length; i++) {
 				if(i == 0) {
 					System.out.println("---------------");
 				}

@@ -38,7 +38,8 @@ public class Padre extends Pessoa{
 			opc = input.nextInt();
 			switch(opc) {
 				case 1:
-					abencoar(alvo);
+					abencoar(alvo); 
+					opc = 0;
 					break;
 				case 0:
 					break;
@@ -57,7 +58,7 @@ public class Padre extends Pessoa{
 	public String cargoResumo() {
 		return "Você é o Padre\n"
 			 + "Você pode abençoar alguém uma unica vez, essa pessoa\n"
-			 + "escolhida ficará imune a qualquer tipo de homicidio direto\n"
+			 + "escolhida ficará imune a qualquer tipo de homicidio\n"
 			 + "durante a noite que você o abençoou. Você só pode fazer\n"
 			 + "isso uma única vez, que Deus o proteja...";
 	}

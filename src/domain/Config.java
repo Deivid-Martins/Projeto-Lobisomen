@@ -7,6 +7,7 @@ public class Config {
 	private Scanner input = new Scanner(System.in);
 	private Random random = new Random();
 	
+	private DayOrNight dayOrNight = new DayOrNight();
 	private Pessoa[] pessoas;
 	
 	private String getIntroducao() {
@@ -172,5 +173,10 @@ public class Config {
 			int leproso = 4;
 			defCargos(pessoasLength, bruxa, detetive, padre, leproso);
 		}
+		Tool.printArrayPessoa(pessoas);
+		System.out.println("\nDigite qualquer coisa para iniciar...");
+		input.next();
+		Tool.clearTerminal();
+		dayOrNight.loop(pessoas);
 	}
 }

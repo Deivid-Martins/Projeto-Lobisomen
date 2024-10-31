@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.Random;
-
 public class Filha extends Pessoa {
-	private Random random = new Random();
 	
 	protected Detetive pai;
 	
@@ -18,7 +15,7 @@ public class Filha extends Pessoa {
 	
 	@Override
 	public void defineDeathMessages() {
-		deathMessages[0] = pai.getNome() + " fala: Eles juraram...";
+		deathMessages[0] = "Detetive fala: Eles juraram...";
 		deathMessages[1] = "Se eu estender minhas mãos, será que alcanço os céus, papai?";
 		deathMessages[2] = "É lua cheia hoje...ela está tão bonita...\nquero assistir seu luar...só mais um pouco...";
 		deathMessages[3] = "A lua está tão linda esta noite... só\nmais um instante sob seu brilho, por favor...";
