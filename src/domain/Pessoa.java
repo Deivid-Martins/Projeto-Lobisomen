@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public abstract class Pessoa implements AllClassesContract {
 	public Scanner input = new Scanner(System.in);
+	private Random random = new Random();
 	
 	protected String nome;
 	protected Status status; // Define se alguem ou está Vivo ou Morto, e tudo mais que for definido no enum Status
@@ -37,6 +38,19 @@ public abstract class Pessoa implements AllClassesContract {
 		if(this.deathMessages[index] != null)
 			return this.deathMessages[index];
 		return null;
+	}
+	
+	public void menu() {
+		int res = 0;
+		int num = random.nextInt(100, 900);
+		System.out.println("CAPTCHA\nDigite " + num + " abaixo para verificar se você está vivo:");
+		while(res != num) {
+			res = input.nextInt();
+			if(res != num) {
+				System.out.println("Errado, digite " + num + " corretamente:");
+			}
+		}
+		System.out.println("CAPTCHA confirmado, volte para o seu lugar em silêncio.");
 	}
 	
 	@Override

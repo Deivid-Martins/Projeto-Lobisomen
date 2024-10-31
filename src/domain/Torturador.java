@@ -60,4 +60,13 @@ public class Torturador extends Pessoa {
 			}
 		}
 	}
+
+	@Override
+	public String cargoResumo() {
+		return "Você agora é um Torturador\n"
+			 + "Após investigar e, antes de descobrir, perder sua filha\n"
+			 + "para o mal, você enlouqueceu e decidiu torturar pessoas.\n"
+			 + "seu poder foi restaurado, mas dessa vez, quem for o alvo\n"
+			 + "morrerá, escolha com sabedoria...";
+	}
 }

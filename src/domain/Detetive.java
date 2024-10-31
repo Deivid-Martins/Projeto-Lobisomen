@@ -67,4 +67,14 @@ public class Detetive extends Pessoa{
 			}
 		}
 	}
+
+	@Override
+	public String cargoResumo() {
+		return "Você é um detetive\n"
+			 + "Seu papel é investigar e descobrir quem é o vilão\n"
+			 + "Você também tem o poder que revela o cargo de alguém\n"
+			 + "mas isso so pode ser usado uma única vez, e você também\n"
+			 + "tem uma filha entre os participantes, algo interessante\n"
+			 + "deve acontecer à depender da condição física dela...";
+	}
 }

@@ -26,17 +26,12 @@ public class Aldeao extends Pessoa{
 	public String toString() {
 		return "Nome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + cargo;
 	}
-	
-	public void menu() {
-		int res = 0;
-		int num = random.nextInt(100, 900);
-		System.out.println("CAPTCHA\nDigite " + num + " abaixo para verificar se você está vivo:");
-		while(res != num) {
-			res = input.nextInt();
-			if(res != num) {
-				System.out.println("Errado, digite " + num + " corretamente:");
-			}
-		}
-		System.out.println("CAPTCHA confirmado, volte para o seu lugar em silêncio.");
+
+	@Override
+	public String cargoResumo() {
+		return "Vocè é um aldeão\n"
+			 + "Seu papel é ficar vivo e descobrir quem é o vilão da partida\n"
+			 + "A noite você receberá uma taferinha boba, apenas para que não\n"
+			 + "notem que você não está fazendo nada a noite, não conte isso a eles.";
 	}
 }

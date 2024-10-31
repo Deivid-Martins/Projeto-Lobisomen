@@ -36,17 +36,12 @@ public class Filha extends Pessoa {
 	protected void defineDad(Detetive pai) {
 		this.pai = pai;
 	}
-	
-	public void menu() {
-		int res = 0;
-		int num = random.nextInt(100, 900);
-		System.out.println("CAPTCHA\nDigite " + num + " abaixo para verificar se você está vivo:");
-		while(res != num) {
-			res = input.nextInt();
-			if(res != num) {
-				System.out.println("Errado, digite " + num + " corretamente:");
-			}
-		}
-		System.out.println("CAPTCHA confirmado, volte para o seu lugar em silêncio.");
+
+	@Override
+	public String cargoResumo() {
+		return "Você é a Filha do Detetive\n"
+			 + "Não esquente a cabeça, você não faz nada especial\n"
+			 + "você só existe para fazer sentido alguns acontecimentos\n"
+			 + "com o Detetive, boa sorte.";
 	}
 }

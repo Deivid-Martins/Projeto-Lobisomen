@@ -66,4 +66,13 @@ public class Bruxa extends Pessoa{
 			}
 		}
 	}
+
+	@Override
+	public String cargoResumo() {
+		return "Você é um(a) Bruxo(a)\n"
+			 + "Seu papel é matar a todos até que não reste mais\n"
+			 + "participantes, toda a noite você poderá matar uma\n"
+			 + "pessoa, mas cuidado com as consequências ao matar\n"
+			 + "certas pessoas...";
+	}
 }

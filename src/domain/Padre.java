@@ -52,4 +52,13 @@ public class Padre extends Pessoa{
 	public String toString() {
 		return "Nome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + cargo;
 	}
+
+	@Override
+	public String cargoResumo() {
+		return "Você é o Padre\n"
+			 + "Você pode abençoar alguém uma unica vez, essa pessoa\n"
+			 + "escolhida ficará imune a qualquer tipo de homicidio direto\n"
+			 + "durante a noite que você o abençoou. Você só pode fazer\n"
+			 + "isso uma única vez, que Deus o proteja...";
+	}
 }

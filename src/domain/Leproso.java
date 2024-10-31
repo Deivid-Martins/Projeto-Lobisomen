@@ -38,4 +38,12 @@ public class Leproso extends Pessoa{
 	public String toString() {
 		return "Nome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + cargo;
 	}
+
+	@Override
+	public String cargoResumo() {
+		return "você é um Leproso\n"
+			 + "Você não faz nada em especial enquanto vivo, mas quando\n"
+			 + "o Vilão matar alguém desse tipo, ficará \"Tonto\" e caso\n"
+			 + "ele tente matar alguém, acabará matando alguém aleatório.";
+	}
 }
