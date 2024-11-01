@@ -13,6 +13,11 @@ public abstract class Pessoa implements AllClassesContract {
 	protected String[] deathMessages;
 	protected String cargo;
 	
+	public Pessoa(String nome) {
+		this.status = Status.Alive;
+		this.nome = nome;
+	}
+	
 	public Pessoa() {
 		this.status = Status.Alive;
 		System.out.print("Defina o nome do jogador: ");

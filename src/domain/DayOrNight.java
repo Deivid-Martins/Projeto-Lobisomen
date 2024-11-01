@@ -1,16 +1,15 @@
 package domain;
 
 import java.util.Scanner;
+import java.util.Random;
 
 public class DayOrNight {
+	private static final Random random = new Random();
 	private static final Scanner input = new Scanner(System.in);
-	
-	private int countDay;
 	private int countNight;
 	private boolean day;
 	
 	public DayOrNight() {
-		this.countDay = 0;
 		this.countNight = 0;
 		this.day = false;
 	}
@@ -54,11 +53,20 @@ public class DayOrNight {
 	
 	private int choosePessoa(Pessoa[] pessoas) {
 		int opc = input.nextInt();
-		while(pessoas[opc] == null) {
-			System.out.print("Opção inexistente, tente novamente: ");
+		while(opc < 0 || opc - 1 > pessoas.length) {
+			System.out.println("Escolha: " + opc);
+			System.out.print("Opção inválida, tente novamente: ");
 			opc = input.nextInt();
 		}
-		return opc - 1;
+		return opc;
+	}
+	
+	private int bruxaTontaKill(Pessoa[] pessoas, int indexBruxa) {
+		int randomPeople = indexBruxa;
+		while(pessoas[randomPeople] instanceof Bruxa) {
+			randomPeople = random.nextInt(0, pessoas.length);
+		}
+		return randomPeople;
 	}
 	
 	public void isNight(Pessoa[] pessoas) {
@@ -66,49 +74,85 @@ public class DayOrNight {
 		this.day = false;
 		countNight++;
 		for(int i = 0; i < pessoas.length; i++) {
-			System.out.println("Participante: " + pessoas[i].getNome() + "\nCargo: " + pessoas[i].cargo);
-			if(countNight == 1) {
-				System.out.println(pessoas[i].cargoResumo());
-			}
-			if(pessoas[i] instanceof Aldeao || pessoas[i] instanceof Filha || pessoas[i] instanceof Leproso) {
-				pessoas[i].menu();
-			} else {
-				Tool.menuPessoas(pessoas);
-				System.out.println("[0] - Não fazer nada\nFaça sua escolha: ");
-				int opc = choosePessoa(pessoas);
-				if(opc != 0) {
-					if(pessoas[i] instanceof Bruxa) {
-						Bruxa b = (Bruxa) pessoas[i];
-						b.menu(pessoas[opc]);
-					} else if(pessoas[i] instanceof Detetive) {
-						Detetive d = (Detetive) pessoas[i];
-						d.menu(pessoas[opc]);
-					} else if(pessoas[i] instanceof Padre) {
-						Padre p = (Padre) pessoas[i];
-						p.menu(pessoas[opc]);
-					} else if(pessoas[i] instanceof Padre) {
-						Padre p = (Padre) pessoas[i];
-						p.menu(pessoas[opc]);
-					} else if(pessoas[i] instanceof Torturador) {
-						Torturador t = (Torturador) pessoas[i];
-						t.menu(pessoas[opc]);
+			if(!(pessoas[i].status == Status.Dead)) {
+				System.out.println("Participante: " + pessoas[i].getNome() + "\nCargo: " + pessoas[i].cargo);
+				if(countNight == 1) {
+					System.out.println(pessoas[i].cargoResumo());
+				}
+				if(pessoas[i] instanceof Torturador) {
+					Torturador t = (Torturador) pessoas[i];
+					if(t.firstNight) {
+						System.out.println(t.cargoResumo());
+						t.firstNight = false;
 					}
 				}
+				if(pessoas[i] instanceof Aldeao || pessoas[i] instanceof Filha || pessoas[i] instanceof Leproso) {
+					pessoas[i].menu();
+				} else {
+					Tool.menuPessoas(pessoas);
+					System.out.println("[0] - Não fazer nada\nFaça sua escolha: ");
+					int opc = choosePessoa(pessoas);
+					if(opc > 0 && opc - 1 < pessoas.length) {
+						if(pessoas[i] instanceof Bruxa) {
+							Bruxa b = (Bruxa) pessoas[i];
+							if(b.tonta == false) {
+								b.menu(pessoas[opc - 1]);
+							} else {
+								opc = bruxaTontaKill(pessoas, i);
+								b.menu(pessoas[opc]);
+								b.tonta = false;
+							}
+						} else if(pessoas[i] instanceof Detetive) {
+							Detetive d = (Detetive) pessoas[i];
+							d.menu(pessoas[opc - 1]);
+						} else if(pessoas[i] instanceof Padre) {
+							Padre p = (Padre) pessoas[i];
+							p.menu(pessoas[opc - 1]);
+						} else if(pessoas[i] instanceof Padre) {
+							Padre p = (Padre) pessoas[i];
+							p.menu(pessoas[opc - 1]);
+						} else if(pessoas[i] instanceof Torturador) {
+							Torturador t = (Torturador) pessoas[i];
+							t.menu(pessoas[opc - 1]);
+						}
+					}
+				}
+				System.out.println("\nDigite qualquer coisa para prosseguir ao proximo participante...");
+				input.next();
+				Tool.clearTerminal();
 			}
-			System.out.println("\nDigite qualquer coisa para prosseguir ao proximo participante...");
-			input.next();
-			Tool.clearTerminal();
 		}
 		System.out.println("\nDigite qualquer coisa para encerrar a noite");
 		input.next();
 		Tool.clearTerminal();
 	}
 	
+	private void detetiveForTorturador (Pessoa[] pessoas) {
+		for(int i = 0; i < pessoas.length; i ++) {
+			if(pessoas[i] instanceof Detetive && pessoas[i].status != Status.Dead) {
+				Detetive d = (Detetive) pessoas[i];
+				if(!(d.checkFilhaAlive(d.getFilha()))) {
+					pessoas[i] = new Torturador(d.getNome());
+				}
+			}
+		}
+	}
+	
+	private void resetBruxa(Pessoa[] pessoas) {
+		for(int i = 0; i < pessoas.length; i ++) {
+			if(pessoas[i] instanceof Bruxa) {
+				Bruxa b = (Bruxa) pessoas[i];
+				b.usedPowerTonight = false;
+			}
+		}
+	}
+	
 	public void isDay(Pessoa[] pessoas) {
 		System.out.println("------------------------- Dia -------------------------");
 		getRelatorio(pessoas);
-		this.countDay++;
 		this.day = true;
+		detetiveForTorturador(pessoas);
+		resetBruxa(pessoas);
 		System.out.println("\nDigite qualquer coisa para encerrar o dia");
 		input.next();
 		Tool.clearTerminal();
@@ -121,10 +165,10 @@ public class DayOrNight {
 				pessoas[i].status = Status.Alive;
 			else if(pessoas[i].status == Status.Dying) {
 				System.out.println("--------------");
-				System.out.println(pessoas[i].getNome());
+				System.out.println(pessoas[i].getNome() + " Morreu:");
 				System.out.println(pessoas[i].isDead());
 				System.out.println("--------------");
-			} else if(pessoas[i].status == Status.Alive || pessoas[i].status == Status.Blessed) {
+			} else if(!(pessoas[i].status == Status.Dead)) {
 				pessoasVivas++;
 			}
 		}

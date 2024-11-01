@@ -68,6 +68,10 @@ public class Detetive extends Pessoa{
 			}
 		}
 	}
+	
+	public Filha getFilha() {
+		return this.filha;
+	}
 
 	@Override
 	public String cargoResumo() {

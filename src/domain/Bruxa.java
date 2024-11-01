@@ -31,20 +31,25 @@ public class Bruxa extends Pessoa{
 	}
 	
 	public void killSomeone(Pessoa alvo) {
-		if(alvo.status != Status.Dead) {
-			if(this.usedPowerTonight == false) {
-				if(!(alvo.status == Status.Blessed)) {
+		if(!this.equals(alvo)) {
+			if(alvo.status != Status.Dead) {
+				if(this.usedPowerTonight == false) {
+					usedPowerTonight = true;
 					System.out.println("Você agarra " + alvo.nome + " pelo pescoço e o joga em uma piscina de ácido.");
-					if(!(alvo instanceof Leproso)) {
-						usedPowerTonight = true;
+					if(!(alvo.status == Status.Blessed)) {
 						alvo.status = Status.Dying;
+						if(alvo instanceof Leproso) {
+							tonta = true;
+						}
 					}
+				} else {
+					System.out.println("Você ja usou seu poder, querida");
 				}
 			} else {
-				System.out.println("Você ja usou seu poder, querida");
+				System.out.println("Esta pessoa ja morreu");
 			}
 		} else {
-			System.out.println("Esta pessoa ja morreu");
+			System.out.println("Não permitimos suicídios aqui!");
 		}
 	}
 	

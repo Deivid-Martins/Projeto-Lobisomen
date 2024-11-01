@@ -1,10 +1,13 @@
 package domain;
 
 public class Torturador extends Pessoa {
-	protected boolean usedPower = false;
+	protected boolean usedPower;
+	protected boolean firstNight;
 
-	public Torturador() {
-		super();
+	public Torturador(String nome) {
+		super(nome);
+		this.usedPower = false;
+		this.firstNight = true;
 		this.cargo = "Torturador";
 		this.deathMessages = new String[4];
 		defineDeathMessages();
@@ -28,18 +31,22 @@ public class Torturador extends Pessoa {
 	 * @param alvo: Pessoa que sofrerá as consequências do Torturador
 	 */
 	public void torturar(Pessoa alvo) {
-		if(alvo.status != Status.Dead) {
-			if(this.usedPower == false) {
-				usedPower = true;
-				if(!(alvo.status == Status.Blessed)) {
+		if(!this.equals(alvo)) {
+			if(alvo.status != Status.Dead) {
+				if(this.usedPower == false) {
+					usedPower = true;
 					System.out.println("Você arranca a pele de " + alvo.nome + " com uma faca e ele confessa que ele(a) é um(a) " + alvo.cargo + "\nEle continua no chão a angustiar, será que sobreviverá?");
-					alvo.status = Status.Dying;
+					if(!(alvo.status == Status.Blessed)) {
+						alvo.status = Status.Dying;
+					}
+				} else {
+					System.out.println("Você ja usou seu poder, bobalhão!");
 				}
 			} else {
-				System.out.println("Você ja usou seu poder, bobalhão!");
+				System.out.println("Seu alvo ja está morto");
 			}
 		} else {
-			System.out.println("Seu alvo ja está morto");
+			System.out.println("Não permitimos suicídios aqui!");
 		}
 	}
 	

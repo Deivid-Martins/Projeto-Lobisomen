@@ -24,10 +24,12 @@ public class Padre extends Pessoa{
 			System.out.println(alvo.nome + " já morreu!");
 		} if (this.equals(alvo)) {
 			System.out.println("Nada disso, seu papel é proteger as demais pessoas");
-		} else {
+		} else if(this.powerUsed == false) {
 			this.powerUsed = true;
 			alvo.status = Status.Blessed;
 			System.out.println("Você livrou " + alvo.nome + ", por uma noite, de todos os males. amém.");
+		} else {
+			System.out.println("Você ja usou o poder divino uma vez...");
 		}
 	}
 	
