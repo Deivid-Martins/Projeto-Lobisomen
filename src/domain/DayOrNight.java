@@ -1,10 +1,8 @@
 package domain;
 
 import java.util.Scanner;
-import java.util.Random;
 
 public class DayOrNight {
-	private static final Random random = new Random();
 	private static final Scanner input = new Scanner(System.in);
 	private int countNight;
 	private boolean day;
@@ -29,14 +27,6 @@ public class DayOrNight {
 			opc = input.nextInt();
 		}
 		return opc;
-	}
-	
-	private int bruxaTontaKill(Pessoa[] pessoas, int indexBruxa) {
-		int randomPeople = indexBruxa;
-		while(pessoas[randomPeople] instanceof Bruxa) {
-			randomPeople = random.nextInt(0, pessoas.length);
-		}
-		return randomPeople;
 	}
 	
 	public void isNight(Pessoa[] pessoas) {
@@ -68,7 +58,7 @@ public class DayOrNight {
 							if(b.tonta == false) {
 								b.menu(pessoas[opc - 1]);
 							} else {
-								opc = bruxaTontaKill(pessoas, i);
+								opc = Tool.bruxaTontaKill(pessoas, i);
 								b.menu(pessoas[opc]);
 								b.tonta = false;
 							}
@@ -97,51 +87,102 @@ public class DayOrNight {
 		Tool.clearTerminal();
 	}
 	
-	private void detetiveForTorturador (Pessoa[] pessoas) {
-		for(int i = 0; i < pessoas.length; i ++) {
-			if(pessoas[i] instanceof Detetive && pessoas[i].status != Status.Dead) {
-				Detetive d = (Detetive) pessoas[i];
-				if(!(d.checkFilhaAlive(d.getFilha()))) {
-					pessoas[i] = new Torturador(d.getNome());
-				}
-			}
-		}
-	}
-	
-	private void resetBruxa(Pessoa[] pessoas) {
-		for(int i = 0; i < pessoas.length; i ++) {
-			if(pessoas[i] instanceof Bruxa) {
-				Bruxa b = (Bruxa) pessoas[i];
-				b.usedPowerTonight = false;
-			}
-		}
-	}
+
 	
 	public void isDay(Pessoa[] pessoas) {
 		System.out.println("------------------------- Dia -------------------------");
-		getRelatorio(pessoas);
 		this.day = true;
-		detetiveForTorturador(pessoas);
-		resetBruxa(pessoas);
+		Tool.getRelatorio(pessoas);
+		Tool.detetiveForTorturador(pessoas);
+		Tool.resetBruxa(pessoas);
+		Tool.clearPessoasVotos(pessoas);
+		System.out.println("\n");
+		voteSystem(pessoas);
 		System.out.println("\nDigite qualquer coisa para encerrar o dia");
 		input.next();
 		Tool.clearTerminal();
 	}
 	
-	private void getRelatorio(Pessoa[] pessoas) {
-		int pessoasVivas = 0;
-		for(int i = 0; i < pessoas.length; i ++) {
-			if(pessoas[i].status == Status.Blessed)
-				pessoas[i].status = Status.Alive;
-			else if(pessoas[i].status == Status.Dying) {
-				System.out.println("--------------");
-				System.out.println(pessoas[i].getNome() + " Morreu:");
-				System.out.println(pessoas[i].isDead());
-				System.out.println("--------------");
-			} else if(!(pessoas[i].status == Status.Dead)) {
-				pessoasVivas++;
-			}
-		}
-		System.out.println("Pessoas vivas restantes: " + pessoasVivas);
+//	private void voteSystem(Pessoa[] pessoas) {
+//		int opc;
+//		System.out.println("-----=== Votação ===-----");
+//		for(int i = 0; i < pessoas.length; i ++) {
+//			if(pessoas[i].status != Status.Dead) {
+//				Tool.menuPessoasWithVotos(pessoas);
+//				System.out.print("Quem você vai votar para a expulsão: ");
+//				opc = input.nextInt();
+//				while(pessoas[opc].status == Status.Dead) {
+//					System.out.print("Tente novamente: ");
+//					opc = input.nextInt();
+//				}
+//				pessoas[opc].votos++;
+//				System.out.println("\nDigite qualquer coisa para ir ao proximo participante");
+//				input.next();
+//				Tool.clearTerminal();
+//			}
+//		}
+//		int indexMaisVotado;
+//		for(int i = 0; i < pessoas.length; i ++) {
+//			for(int j = 0; j < pessoas.length; j ++) {
+//				if(pessoas[i].votos > pessoas[j].votos) {
+//					indexMaisVotado = i;
+//				}
+//				if(pessoas[indexMaisVotado].votos == pessoas[j].votos) {
+//					indexMaisVotado = null;
+//				}
+//			}
+//		}
+//	}
+	
+	private void voteSystem(Pessoa[] pessoas) {
+	    int opc;
+
+	    System.out.println("-----=== Votação ===-----");
+	    for (int i = 0; i < pessoas.length; i++) {
+	        if (pessoas[i].status != Status.Dead) {
+	            Tool.menuPessoasWithVotos(pessoas);
+	            System.out.print("Quem você vai votar para a expulsão: ");
+	            opc = input.nextInt() - 1;
+	            while (pessoas[opc].status == Status.Dead || opc < 0 || opc >= pessoas.length) {
+	                System.out.print("Tente novamente: ");
+	                opc = input.nextInt();
+	            }
+	            pessoas[opc].votos++;
+	            System.out.println("\nDigite qualquer coisa para ir ao próximo participante");
+	            input.next();
+	            Tool.clearTerminal();
+	        }
+	    }
+
+	    // Encontrar o mais votado
+	    int maxVotos = -1;
+	    int countMaxVotados = 0;
+
+	    for (int i = 0; i < pessoas.length; i++) {
+	        if (pessoas[i].votos > maxVotos) {
+	            maxVotos = pessoas[i].votos;
+	            countMaxVotados = 1; // Resetar o contador para 1, pois encontramos um novo máximo
+	        } else if (pessoas[i].votos == maxVotos && maxVotos != 0) {
+	            countMaxVotados++; // Contar quantas pessoas têm o mesmo número de votos
+	        }
+	    }
+
+	    // Exibir resultado da votação
+	    System.out.println("-----=== Resultado da Votação ===-----");
+	    if (countMaxVotados > 1) {
+	        System.out.println("Empate ocorreu entre " + countMaxVotados + " pessoas.");
+	    } else if (maxVotos > 0) {
+	        for (int i = 0; i < pessoas.length; i++) {
+	            if (pessoas[i].votos == maxVotos) {
+	                System.out.println("A pessoa mais votada para a expulsão é: " + pessoas[i].nome);
+	                System.out.println("Com um total de " + pessoas[i].votos + " votos.");
+	                pessoas[i].status = Status.Dying;
+	                System.out.println(pessoas[i].getNome() + " morreu: " + pessoas[i].isDead());
+	            }
+	        }
+	    } else {
+	        System.out.println("Nenhuma votação válida foi realizada.");
+	    }
 	}
+
 }
