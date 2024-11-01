@@ -140,8 +140,31 @@ public class Config {
 		return opc;
 	}
 	
+	private boolean haveBruxaAlive() {
+		for(int i = 0; i < this.pessoas.length; i ++)
+			if(this.pessoas[i] instanceof Bruxa && !(this.pessoas[i].status == Status.Dead))
+				return true;
+		return false;
+	}
+	
+	private boolean haveGoodPessoasAlive() {
+		int count = 0;
+		for(int i = 0; i < this.pessoas.length; i ++)
+			if(!(this.pessoas[i] instanceof Bruxa) && pessoas[i].status != Status.Dead)
+				count++;
+		if(count >= 3)
+			return true;
+		return false;
+	}
+	
+	private boolean endGame() {
+		if(haveBruxaAlive() && haveGoodPessoasAlive())
+			return true;
+		return false;
+	}
+	
 	/**
-	 * Função onde inicia absolutamente tudo na main, nada além disso deve ser executado na mais, aqui deve
+	 * Função onde inicia absolutamente tudo na main, nada além disso deve ser executado na main, aqui deve
 	 * conter todas as regras para o funcionamento planejado
 	 */
 	public void startGame() {
@@ -176,6 +199,27 @@ public class Config {
 		System.out.println("\nDigite qualquer coisa para iniciar...");
 		input.next();
 		Tool.clearTerminal();
-		dayOrNight.loop(pessoas);
+		while(endGame())
+			dayOrNight.loop(pessoas);
+		if(haveBruxaAlive()) {
+			System.out.println("------------------ Bad Ending ------------------\n"
+						   + "\"Uma Justa Injustiça\""
+						   + "\n"
+						   + "\n"
+						     + "VOCÊS QUEIMARAM A BRUXA. CONSEQUISTES AGRADAR AO VOSSO DEUS?\n"
+						     + "Filha: Jamais voltara os vossos olhos aos céus novamente.\n"
+						     + "Detetive ou Torturador: Não mais houvera bons-dias, não mais houvera risos,não mais houvera\n"
+						     + "piadas bobas. Aquilo que mais amará, agora é apenas uma lembrança desbotada. Vossa morada\n"
+						     + "não mais jaz aquecida.\n"
+						     + "Leproso: Sem as medicações do botânico, sucumbirá antes do alvorecer da primareva.\n"
+						     + "Padre: Certamente ALGUM Deus está convosco.\n"
+						     + "Aldeões: Graças a Deus, de volta ao inferno. Marcadod por pecados, jamais inteiros. Em\n"
+						     + "dívida com os que ja foram, cobrai aqueles que dormem.");
+		} else
+			System.out.println("------------------ Bad Ending ------------------\n"
+					   + "\"Uma Justa Injustiça\""
+					   + "\n"
+					   + "\n"
+					     + "VOCÊS SUCUMBIRAM PARA A BRUXA.");
 	}
 }

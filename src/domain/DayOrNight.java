@@ -11,44 +11,14 @@ public class DayOrNight {
 	
 	public DayOrNight() {
 		this.countNight = 0;
-		this.day = false;
-	}
-	
-	private boolean haveGoodPessoaAlive(Pessoa[] pessoas) {
-		int counterAlives = 0;
-		for(int i = 0; i < pessoas.length; i ++) {
-			if(!(pessoas[i] instanceof Bruxa) && !(pessoas[i].status == Status.Dead)) {
-				counterAlives++;
-				if(counterAlives >= 2) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-	private boolean bruxaStillAlive(Pessoa[] pessoas) {
-		for(int i = 0; i < pessoas.length; i ++) {
-			if(pessoas[i] instanceof Bruxa && !(pessoas[i].status == Status.Dead)) {
-				return true;
-			}
-		}
-		return false;
+		this.day = true;
 	}
 	
 	public void loop(Pessoa[] pessoas) {
-		while(haveGoodPessoaAlive(pessoas) || bruxaStillAlive(pessoas)) {
-			if(day == true) {
+			if(day == true)
 				isNight(pessoas);
-			} else if(day == false) {
+			else if(day == false)
 				isDay(pessoas);
-			}
-		}
-		if(bruxaStillAlive(pessoas)) {
-			System.out.println("Que pena, a bruxa venceu...");
-		} else if (haveGoodPessoaAlive(pessoas)) {
-			System.out.println("Que pena, a bruxa perdeu...");
-		}
 	}
 	
 	private int choosePessoa(Pessoa[] pessoas) {

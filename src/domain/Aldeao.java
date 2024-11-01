@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.Random;
-
 public class Aldeao extends Pessoa{
-	private Random random = new Random();
 	
 	public Aldeao() {
 		super();
