@@ -1,6 +1,6 @@
 package run;
 
-import domain.*;
+import domain.Config;
 
 public class App {
 	public static void main(String[] args) {
