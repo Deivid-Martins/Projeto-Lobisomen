@@ -22,7 +22,7 @@ public class Padre extends Pessoa{
 	public void abencoar(Pessoa alvo) {
 		if(alvo.getStatus() == Status.Dead) {
 			System.out.println(alvo.nome + " já morreu!");
-		} if (this.equals(alvo)) {
+		} else if(this.equals(alvo)) {
 			System.out.println("Nada disso, seu papel é proteger as demais pessoas");
 		} else if(this.powerUsed == false) {
 			this.powerUsed = true;

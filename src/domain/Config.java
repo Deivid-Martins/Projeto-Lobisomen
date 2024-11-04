@@ -152,7 +152,7 @@ public class Config {
 		for(int i = 0; i < this.pessoas.length; i ++)
 			if(!(this.pessoas[i] instanceof Bruxa) && pessoas[i].status != Status.Dead)
 				count++;
-		if(count >= 3)
+		if(count >= 2)
 			return true;
 		return false;
 	}
@@ -172,12 +172,13 @@ public class Config {
 		System.out.println(getIntroducao());
 		System.out.print("Defina a quantia de jogadores: ");
 		int pessoasLength = input.nextInt();
+		
 		if(pessoasLength <= 4) {
 			System.out.println("Vai ter nem graça com esse tanto de gente\nvá pra casa vá.");
 		} else if (pessoasLength <= 8) {
 			this.pessoas = new Pessoa[pessoasLength];
 			int bruxa = 1;
-			int detetive = 1;
+			int detetive = 1; // Filha de brinde a cada Detetive
 			int padre = 1;
 			int leproso = 1;
 			defCargos(pessoasLength, bruxa, detetive, padre, leproso);
@@ -196,12 +197,13 @@ public class Config {
 			int leproso = 4;
 			defCargos(pessoasLength, bruxa, detetive, padre, leproso);
 		}
+		
 		System.out.println("\nDigite qualquer coisa para iniciar...");
 		input.next();
 		Tool.clearTerminal();
 		while(endGame())
 			dayOrNight.loop(pessoas);
-		if(haveBruxaAlive()) {
+		if(!haveBruxaAlive()) {
 			System.out.println("------------------ Bad Ending ------------------\n"
 						   + "\"Uma Justa Injustiça\""
 						   + "\n"

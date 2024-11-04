@@ -92,10 +92,11 @@ public abstract class Tool {
 	}
 	
 	public static int bruxaTontaKill(Pessoa[] pessoas, int indexBruxa) {
-		int randomPeople = indexBruxa;
-		while(pessoas[randomPeople] instanceof Bruxa) {
+		int randomPeople;
+		do {
 			randomPeople = random.nextInt(0, pessoas.length);
-		}
+		} while(pessoas[randomPeople] instanceof Bruxa && pessoas[randomPeople].status == Status.Dead);
+		
 		return randomPeople;
 	}
 }

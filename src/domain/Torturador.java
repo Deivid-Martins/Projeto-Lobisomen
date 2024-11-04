@@ -35,7 +35,10 @@ public class Torturador extends Pessoa {
 			if(alvo.status != Status.Dead) {
 				if(this.usedPower == false) {
 					usedPower = true;
-					System.out.println("Você arranca a pele de " + alvo.nome + " com uma faca e ele confessa que ele(a) é um(a) " + alvo.cargo + "\nEle continua no chão a angustiar, será que sobreviverá?");
+					System.out.println("Você arranca a pele de " + alvo.nome + " com uma faca e ele"
+									 + "\nconfessa que ele(a) é um(a) " + alvo.cargo + "\n"
+							         + "Ele continua no chão a angustiar, será que sobreviverá?");
+					
 					if(!(alvo.status == Status.Blessed)) {
 						alvo.status = Status.Dying;
 					}

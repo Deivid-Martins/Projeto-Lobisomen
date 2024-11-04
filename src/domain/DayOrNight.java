@@ -22,7 +22,6 @@ public class DayOrNight {
 	private int choosePessoa(Pessoa[] pessoas) {
 		int opc = input.nextInt();
 		while(opc < 0 || opc - 1 > pessoas.length) {
-			System.out.println("Escolha: " + opc);
 			System.out.print("Opção inválida, tente novamente: ");
 			opc = input.nextInt();
 		}
@@ -68,9 +67,6 @@ public class DayOrNight {
 						} else if(pessoas[i] instanceof Padre) {
 							Padre p = (Padre) pessoas[i];
 							p.menu(pessoas[opc - 1]);
-						} else if(pessoas[i] instanceof Padre) {
-							Padre p = (Padre) pessoas[i];
-							p.menu(pessoas[opc - 1]);
 						} else if(pessoas[i] instanceof Torturador) {
 							Torturador t = (Torturador) pessoas[i];
 							t.menu(pessoas[opc - 1]);
@@ -102,46 +98,14 @@ public class DayOrNight {
 		input.next();
 		Tool.clearTerminal();
 	}
-	
-//	private void voteSystem(Pessoa[] pessoas) {
-//		int opc;
-//		System.out.println("-----=== Votação ===-----");
-//		for(int i = 0; i < pessoas.length; i ++) {
-//			if(pessoas[i].status != Status.Dead) {
-//				Tool.menuPessoasWithVotos(pessoas);
-//				System.out.print("Quem você vai votar para a expulsão: ");
-//				opc = input.nextInt();
-//				while(pessoas[opc].status == Status.Dead) {
-//					System.out.print("Tente novamente: ");
-//					opc = input.nextInt();
-//				}
-//				pessoas[opc].votos++;
-//				System.out.println("\nDigite qualquer coisa para ir ao proximo participante");
-//				input.next();
-//				Tool.clearTerminal();
-//			}
-//		}
-//		int indexMaisVotado;
-//		for(int i = 0; i < pessoas.length; i ++) {
-//			for(int j = 0; j < pessoas.length; j ++) {
-//				if(pessoas[i].votos > pessoas[j].votos) {
-//					indexMaisVotado = i;
-//				}
-//				if(pessoas[indexMaisVotado].votos == pessoas[j].votos) {
-//					indexMaisVotado = null;
-//				}
-//			}
-//		}
-//	}
-	
+
 	private void voteSystem(Pessoa[] pessoas) {
 	    int opc;
-
 	    System.out.println("-----=== Votação ===-----");
 	    for (int i = 0; i < pessoas.length; i++) {
 	        if (pessoas[i].status != Status.Dead) {
 	            Tool.menuPessoasWithVotos(pessoas);
-	            System.out.print("Quem você vai votar para a expulsão: ");
+	            System.out.print(pessoas[i].getNome() + ", Quem você vai votar para a expulsão: ");
 	            opc = input.nextInt() - 1;
 	            while (pessoas[opc].status == Status.Dead || opc < 0 || opc >= pessoas.length) {
 	                System.out.print("Tente novamente: ");
