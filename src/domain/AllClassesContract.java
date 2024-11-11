@@ -13,4 +13,6 @@ public interface AllClassesContract {
 	
 	@Override
 	String toString(); // imprime informações útreis
+
+	teste
 }
