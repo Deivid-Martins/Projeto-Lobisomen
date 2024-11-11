@@ -56,7 +56,7 @@ public class Torturador extends Pessoa {
 						alvo.status = Status.Dying; // ela começa a morrer
 					}
 				} else {
-					System.out.println("Você ja usou seu poder, bobalhão!");
+					System.out.println("Você ja usou sua habilidade. Não tente me enganar, jogador!");
 				}
 			} else {
 				System.out.println("Seu alvo ja está morto");
@@ -94,9 +94,9 @@ public class Torturador extends Pessoa {
 	@Override
 	public String cargoResumo() {
 		return "Você agora é um Torturador\n"
-			 + "Após investigar e, antes de descobrir, perder sua filha\n"
-			 + "para o mal, você enlouqueceu e decidiu torturar pessoas.\n"
-			 + "seu poder foi restaurado, mas dessa vez, quem for o alvo\n"
-			 + "morrerá, escolha com sabedoria...";
+			 + "Você caçou e investigou, mas antes de descobrir, perdeu sua filha.\n"
+			 + "Você sente a loucura clamando seu nome e...você sucumbi a ela.\n"
+			 + "Sua habilidade foi restaurada, mas dessa vez, quem for o alvo\n"
+			 + "talvez não resista ao interrogatório. Escolha com sabedoria...";
 	}
 }

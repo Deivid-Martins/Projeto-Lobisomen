@@ -20,12 +20,12 @@ public class DayOrNight {
 	/**
 	 * Se está de dia, vira noite e executa as funções da noite
 	 * Se está de noite, vira dia e executa as funções do dia
-	 * @param pessoas: arra de jogadores
+	 * @param pessoas: array de jogadores
 	 */
 	public void loop(Pessoa[] pessoas) {
 			if(day == true)
 				isNight(pessoas);
-			else if(day == false)
+			else(day == false)
 				isDay(pessoas);
 	}
 
@@ -114,7 +114,7 @@ public class DayOrNight {
 				Tool.clearTerminal();
 			}
 		}
-		System.out.println("\nDigite qualquer coisa para encerrar a noite");
+		System.out.println("\nDigite qualquer coisa para encerrar esta noite, jogador.");
 		input.next();
 		Tool.clearTerminal();
 	}
@@ -162,7 +162,7 @@ public class DayOrNight {
 	            
 	            pessoas[opc].votos++; // aumenta os votos de alguém
 	            
-	            System.out.println("\nDigite qualquer coisa para ir ao próximo participante");
+	            System.out.println("\nDigite qualquer coisa, jogador, para ir ao próximo participante");
 	            input.next();
 	            Tool.clearTerminal();
 	        }

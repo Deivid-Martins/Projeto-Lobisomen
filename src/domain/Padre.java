@@ -38,7 +38,7 @@ public class Padre extends Pessoa{
 			System.out.println(alvo.nome + " já morreu!");
 		} 
 		else if(this.equals(alvo)) { // caso ele tente se abençoar
-			System.out.println("Nada disso, seu papel é proteger as demais pessoas");
+			System.out.println("Você não consegue usar isso com você mesmo, seu papel é proteger as demais pessoas, jogador.");
 		}
 		else if(this.powerUsed == false) { // caso ele não tenha usado o poder ainda
 			this.powerUsed = true; // usa o poder
@@ -46,7 +46,7 @@ public class Padre extends Pessoa{
 			System.out.println("Você livrou " + alvo.nome + ", por uma noite, de todos os males. amém.");
 		} 
 		else { // caso ele já tenha usado o poder
-			System.out.println("Você ja usou o poder divino uma vez...");
+			System.out.println("Você ja usou o poder divino...");
 		}
 	}
 	
@@ -90,7 +90,7 @@ public class Padre extends Pessoa{
 	public String cargoResumo() {
 		return "Você é o Padre\n"
 			 + "Você pode abençoar alguém uma unica vez, essa pessoa\n"
-			 + "escolhida ficará imune a qualquer tipo de homicidio\n"
+			 + "escolhida ficará imune a qualquer tipo de perigo\n"
 			 + "durante a noite que você o abençoou. Você só pode fazer\n"
 			 + "isso uma única vez, que Deus o proteja...";
 	}

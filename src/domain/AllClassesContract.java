@@ -12,6 +12,6 @@ public interface AllClassesContract {
 	String cargoResumo(); // da um resumo do que aquele jogador pode fazer
 	
 	@Override
-	String toString(); // imprime informações útreis
+	String toString(); // imprime informações úteis
 
 }
