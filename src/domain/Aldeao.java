@@ -45,6 +45,5 @@ public class Aldeao extends Pessoa {
 			 + "Ao cair da noite, jogador, você receberá uma missão, apenas para que não\n"
 			 + "notem que você não está fazendo nada a noite, não conte isso a eles.";
 
-		//teste
 	}
 }
