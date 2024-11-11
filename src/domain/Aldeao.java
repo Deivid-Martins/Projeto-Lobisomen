@@ -44,5 +44,7 @@ public class Aldeao extends Pessoa {
 			 + "Seu papel é ficar vivo e descobrir quem é o vilão da partida\n"
 			 + "Ao cair da noite, jogador, você receberá uma missão, apenas para que não\n"
 			 + "notem que você não está fazendo nada a noite, não conte isso a eles.";
+
+		//teste
 	}
 }
