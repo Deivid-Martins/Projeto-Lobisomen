@@ -42,7 +42,7 @@ public class Aldeao extends Pessoa {
 	public String cargoResumo() {
 		return "Vocè é um aldeão\n"
 			 + "Seu papel é ficar vivo e descobrir quem é o vilão da partida\n"
-			 + "A noite você receberá uma taferinha boba, apenas para que não\n"
+			 + "Ao cair da noite, jogador, você receberá uma missão, apenas para que não\n"
 			 + "notem que você não está fazendo nada a noite, não conte isso a eles.";
 	}
 }
