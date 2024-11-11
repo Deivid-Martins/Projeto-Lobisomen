@@ -25,7 +25,7 @@ public class DayOrNight {
 	public void loop(Pessoa[] pessoas) {
 			if(day == true)
 				isNight(pessoas);
-			else(day == false)
+			else
 				isDay(pessoas);
 	}
 
