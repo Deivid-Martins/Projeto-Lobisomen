@@ -52,6 +52,7 @@ public abstract class Tool {
 					System.out.printf("[%d] - %s - Votos: %d\n", i+1, pessoas[i].getNome(), pessoas[i].votos); // Exibe uma opção do array
 				}
 			}
+			System.out.println("[0] - Votar Nulo");
 			System.out.println("---------------");
 		}
 	}

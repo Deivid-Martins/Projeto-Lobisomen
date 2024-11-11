@@ -36,7 +36,7 @@ public class Config {
 	 * Verifica se existe uma posição nula no array de jogadores
 	 * @return boolean. sim caso nulo
 	 */
-	private boolean pessoasStillNull() {
+	private boolean anyPessoasStillNull() {
 		for(int i = 0; i < this.pessoas.length; i ++) {
 			if(pessoas[i] == null)
 				return true;
@@ -166,7 +166,7 @@ public class Config {
 		}
 		// se ainda tem posições que precisam ser preenchidas
 		// todas elas viram aldeões
-		if(pessoasStillNull()) {
+		if(anyPessoasStillNull()) {
 			for(int i = 0; i < pessoas.length; i ++) {
 				if(this.pessoas[i] == null) {
 					this.pessoas[i] = new Aldeao();
@@ -278,33 +278,35 @@ public class Config {
 			defCargos(pessoasLength, bruxa, detetive, padre, leproso);
 		}
 		
-		System.out.println("\nDigite qualquer coisa para iniciar...");
-		input.next();
-		Tool.clearTerminal();
-		
-		while(endGame()) // enquanto ainda der jogo
-			dayOrNight.loop(pessoas); // troca o dia pela noite e executa o que for necessário
-		
-		if(!haveBruxaAlive()) { // caso matarem a bruxa
-			System.out.println("------------------ Bad Ending ------------------\n"
+		if(pessoasLength > 4) {
+			System.out.println("\nDigite qualquer coisa para iniciar...");
+			input.next();
+			Tool.clearTerminal();
+			
+			while(endGame()) // enquanto ainda der jogo
+				dayOrNight.loop(pessoas); // troca o dia pela noite e executa o que for necessário
+			
+			if(!haveBruxaAlive()) { // caso matarem a bruxa
+				System.out.println("------------------ Bad Ending ------------------\n"
+							   + "\"Uma Justa Injustiça\""
+							   + "\n"
+							   + "\n"
+							     + "VOCÊS QUEIMARAM A BRUXA. CONSEQUISTES AGRADAR AO VOSSO DEUS?\n"
+							     + "Filha: Jamais voltara os vossos olhos aos céus novamente.\n"
+							     + "Detetive ou Torturador: Não mais houvera bons-dias, não mais houvera risos,não mais houvera\n"
+							     + "piadas bobas. Aquilo que mais amará, agora é apenas uma lembrança desbotada. Vossa morada\n"
+							     + "não mais jaz aquecida.\n"
+							     + "Leproso: Sem as medicações do botânico, sucumbirá antes do alvorecer da primareva.\n"
+							     + "Padre: Certamente ALGUM Deus está convosco.\n"
+							     + "Aldeões: Graças a Deus, de volta ao inferno. Marcadod por pecados, jamais inteiros. Em\n"
+							     + "dívida com os que ja foram, cobrai aqueles que dormem.");
+				
+			} else // caso morrerem
+				System.out.println("------------------ Bad Ending ------------------\n"
 						   + "\"Uma Justa Injustiça\""
 						   + "\n"
 						   + "\n"
-						     + "VOCÊS QUEIMARAM A BRUXA. CONSEQUISTES AGRADAR AO VOSSO DEUS?\n"
-						     + "Filha: Jamais voltara os vossos olhos aos céus novamente.\n"
-						     + "Detetive ou Torturador: Não mais houvera bons-dias, não mais houvera risos,não mais houvera\n"
-						     + "piadas bobas. Aquilo que mais amará, agora é apenas uma lembrança desbotada. Vossa morada\n"
-						     + "não mais jaz aquecida.\n"
-						     + "Leproso: Sem as medicações do botânico, sucumbirá antes do alvorecer da primareva.\n"
-						     + "Padre: Certamente ALGUM Deus está convosco.\n"
-						     + "Aldeões: Graças a Deus, de volta ao inferno. Marcadod por pecados, jamais inteiros. Em\n"
-						     + "dívida com os que ja foram, cobrai aqueles que dormem.");
-			
-		} else // caso morrerem
-			System.out.println("------------------ Bad Ending ------------------\n"
-					   + "\"Uma Justa Injustiça\""
-					   + "\n"
-					   + "\n"
-					     + "VOCÊS SUCUMBIRAM PARA A BRUXA.");
+						     + "VOCÊS SUCUMBIRAM PARA A BRUXA.");
+		}
 	}
 }

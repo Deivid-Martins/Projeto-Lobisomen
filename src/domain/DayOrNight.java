@@ -145,52 +145,56 @@ public class DayOrNight {
 	 */
 	private void voteSystem(Pessoa[] pessoas) {
 	    int opc; // escolha do usuário
-	 
+	    
 	    System.out.println("-----=== Votação ===-----");
+	    
 	    for (int i = 0; i < pessoas.length; i++) {
 	        if (pessoas[i].status != Status.Dead) { // se a pessoa não estiver morta
 	            Tool.menuPessoasWithVotos(pessoas); // imprime o menu das pessoas com seus votos
 	            
-	            System.out.print(pessoas[i].getNome() + ", Quem você vai votar para a expulsão: "); // prompt
-	            opc = input.nextInt() - 1; // faz a escolha diminuindo um
+	            System.out.print(pessoas[i].getNome() + ", Quem você vai votar para a expulsão: ");
+	            opc = input.nextInt(); // Escolha da votação de cada usuário
 	            
-	            // enquanto escolher alguém inválido pede outro input
-	            while (pessoas[opc].status == Status.Dead || opc < 0 || opc >= pessoas.length) {
-	                System.out.print("Tente novamente: ");
+	            // Enquanto escolher alguém inválido ou pessoa morta, pede outro input
+	            while (opc < 0 || opc > pessoas.length || (opc > 0 && pessoas[opc - 1].status == Status.Dead)) {
+	                System.out.print("Opção inválida! Tente novamente: ");
 	                opc = input.nextInt();
 	            }
 	            
-	            pessoas[opc].votos++; // aumenta os votos de alguém
+	            if (opc > 0) {
+	                pessoas[opc - 1].votos++; // Incrementa votos na pessoa escolhida
+	            } else {
+	                System.out.println("Você não votou em ninguém...");
+	            }
 	            
 	            System.out.println("\nDigite qualquer coisa, jogador, para ir ao próximo participante");
-	            input.next();
-	            Tool.clearTerminal();
+	            input.next(); // Consumir o enter ou qualquer entrada
+	            Tool.clearTerminal(); // Limpa o terminal para a próxima votação
 	        }
 	    }
 
 	    // Encontrar o mais votado
 	    int maxVotos = -1;
-	    int countMaxVotados = 0;
+	    boolean haveEmpate = false;
 
 	    for (int i = 0; i < pessoas.length; i++) {
 	        if (pessoas[i].votos > maxVotos) {
 	            maxVotos = pessoas[i].votos;
-	            countMaxVotados = 1; // Resetar o contador para 1, pois encontramos um novo máximo
 	        } else if (pessoas[i].votos == maxVotos && maxVotos != 0) {
-	            countMaxVotados++; // Contar quantas pessoas têm o mesmo número de votos
+	            haveEmpate = true; // Contar quantas pessoas têm o mesmo número de votos
 	        }
 	    }
 
 	    // Exibir resultado da votação
 	    System.out.println("-----=== Resultado da Votação ===-----");
-	    if (countMaxVotados > 1) {
-	        System.out.println("Empate ocorreu entre " + countMaxVotados + " pessoas.");
+	    if (haveEmpate) {
+	        System.out.println("Empate ocorreu...");
 	    } else if (maxVotos > 0) {
 	        for (int i = 0; i < pessoas.length; i++) {
 	            if (pessoas[i].votos == maxVotos) {
 	                System.out.println("A pessoa mais votada para a expulsão é: " + pessoas[i].nome);
 	                System.out.println("Com um total de " + pessoas[i].votos + " votos.");
-	                pessoas[i].status = Status.Dying;
+	                pessoas[i].status = Status.Dying; // Pessoa mais votada morre
 	                System.out.println(pessoas[i].getNome() + " morreu: " + pessoas[i].isDead());
 	            }
 	        }
