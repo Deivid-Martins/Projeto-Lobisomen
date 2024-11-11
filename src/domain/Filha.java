@@ -54,8 +54,6 @@ public class Filha extends Pessoa {
 	@Override
 	public String cargoResumo() {
 		return "Você é a Filha do Detetive\n"
-			 + "Não esquente a cabeça, você não faz nada especial\n"
-			 + "você só existe para fazer sentido alguns acontecimentos\n"
-			 + "com o Detetive, boa sorte.";
+			 + "Não esquente a cabeça, apenas seja uma boa garota.";
 	}
 }
