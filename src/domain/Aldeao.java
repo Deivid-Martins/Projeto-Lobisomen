@@ -1,14 +1,22 @@
+// classe que gerencia os aldeões do jogo
 package domain;
 
-public class Aldeao extends Pessoa{
+public class Aldeao extends Pessoa {
 	
+	/**
+	 * Construtor de aldeão
+	 */
 	public Aldeao() {
-		super();
-		this.cargo = "Aldeão";
-		this.deathMessages = new String[6];
-		defineDeathMessages();
+		super(); // herda de pessoa
+		
+		this.cargo = "Aldeão"; // define o cargo
+		this.deathMessages = new String[6]; // define a quantidade de mensagens de morte
+		defineDeathMessages(); // define as mensagens de morte em si
 	}
 
+	/**
+	 * Define as mensagens de morte com base num array com várias strings 
+	 */
 	@Override
 	public void defineDeathMessages() {
 		deathMessages[0] = "Mas...o padre disse que nenhum mal...";
@@ -19,11 +27,17 @@ public class Aldeao extends Pessoa{
 		deathMessages[5] = "Pai, está frio aqui... você vai me buscar logo?";
 	}
 	
+	/**
+	 * Imprime o nome, status e cargo do aldeão
+	 */
 	@Override
 	public String toString() {
 		return "Nome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + cargo;
 	}
 
+	/**
+	 * Mostra um resumo do que o aldeão pode fazer
+	 */
 	@Override
 	public String cargoResumo() {
 		return "Vocè é um aldeão\n"

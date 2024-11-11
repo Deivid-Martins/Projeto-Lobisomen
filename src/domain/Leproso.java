@@ -1,17 +1,28 @@
+// classe para gerenciar o leproso
 package domain;
 
-import java.util.Random;
+import java.util.Random; // para aleatoriedade
 
 public class Leproso extends Pessoa{
-	private Random random = new Random();
+	private Random random; // para aleatoriedade
 	
+	/**
+	 * Construtor de leproso
+	 */
 	public Leproso() {
-		super();
-		this.cargo = "Leproso";
+		super(); // herda de pessoa
+		this.random = new Random(); // inicia o randomizador
+		
+		this.cargo = "Leproso"; // define o cargo
+		
+		// define as mensagens de morte
 		this.deathMessages = new String[5];
 		defineDeathMessages();
 	}
 
+	/**
+	 * Define as mensagens de morte com base num array de strings 
+	 */
 	@Override
 	public void defineDeathMessages() {
 		this.deathMessages[0] = "Está tudo bem, já não sinto mais dor...";
@@ -21,24 +32,36 @@ public class Leproso extends Pessoa{
 		this.deathMessages[4] = "Eu sabia... Sempre fui uma chama fraca...\nMas que queimou até o fim...";
 	}
 	
+	/**
+	 * Executa o captcha, assim como o aldeão
+	 */
 	public void menu() {
-		int res = 0;
+		int resposta = 0;
 		int num = random.nextInt(100, 900);
+		
 		System.out.println("CAPTCHA\nDigite " + num + " abaixo para verificar se você está vivo:");
-		while(res != num) {
-			res = input.nextInt();
-			if(res != num) {
+		
+		while(resposta != num) {
+			resposta = input.nextInt();
+		
+			if(resposta != num) {
 				System.out.println("Errado, digite " + num + " corretamente:");
 			}
 		}
 		System.out.println("CAPTCHA confirmado, volte para o seu lugar em silêncio.");
 	}
 	
+	/**
+	 * Imprime o nome, status e cargo do jogador
+	 */
 	@Override
 	public String toString() {
 		return "Nome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + cargo;
 	}
 
+	/**
+	 * Da um resumo do cargo do jogador
+	 */
 	@Override
 	public String cargoResumo() {
 		return "você é um Leproso\n"

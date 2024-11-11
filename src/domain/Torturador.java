@@ -1,18 +1,28 @@
+// classe que gerencia a evolução do detetive
 package domain;
 
 public class Torturador extends Pessoa {
-	protected boolean usedPower;
-	protected boolean firstNight;
+	protected boolean usedPower; // verifica se ele já usou o poder
+	protected boolean firstNight; // analisa se está é a primeira noite
 
+	/**
+	 * Construtor de torturador
+	 * @param nome: nome do jogador
+	 */
 	public Torturador(String nome) {
-		super(nome);
-		this.usedPower = false;
-		this.firstNight = true;
-		this.cargo = "Torturador";
+		super(nome); // herda de pessoa
+		this.usedPower = false; // não usou o poder ainda, já que iniciou agora
+		this.firstNight = true; // é a primeira aparição do torturador no jogo
+		this.cargo = "Torturador"; // define o cargo
+		
+		// define as mensagens de morte
 		this.deathMessages = new String[4];
 		defineDeathMessages();
 	}
 	
+	/**
+	 * Define as mensagens de morte com base em um array de strings
+	 */
 	@Override
 	public void defineDeathMessages() {
 		deathMessages[0] = "Eu lutei tanto...e mesmo assim...";
@@ -21,6 +31,9 @@ public class Torturador extends Pessoa {
 		deathMessages[3] = "Eles falam... todos falam... e mesmo assim...";
 	}
 	
+	/**
+	 * Retorna o nome, status e cargo do jogador
+	 */
 	@Override
 	public String toString() {
 		return "Nome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + this.cargo;
@@ -28,19 +41,19 @@ public class Torturador extends Pessoa {
 	
 	/**
 	 * Função que realiza o uso do poder do torturador e revela o cargo de alguem escolhido por ele, apenas uma vez
-	 * @param alvo: Pessoa que sofrerá as consequências do Torturador
+	 * @param alvo: pessoa que sofrerá as consequências do Torturador
 	 */
 	public void torturar(Pessoa alvo) {
-		if(!this.equals(alvo)) {
-			if(alvo.status != Status.Dead) {
-				if(this.usedPower == false) {
-					usedPower = true;
+		if(!this.equals(alvo)) { // se ele não quiser cometer suicídio
+			if(alvo.status != Status.Dead) { // se a pessoa não estiver morta
+				if(this.usedPower == false) { // se ele ainda não usou o poder
+					usedPower = true; // ele usa o poder
 					System.out.println("Você arranca a pele de " + alvo.nome + " com uma faca e ele"
 									 + "\nconfessa que ele(a) é um(a) " + alvo.cargo + "\n"
 							         + "Ele continua no chão a angustiar, será que sobreviverá?");
 					
-					if(!(alvo.status == Status.Blessed)) {
-						alvo.status = Status.Dying;
+					if(!(alvo.status == Status.Blessed)) { // se a pessoa não estiver abençoada
+						alvo.status = Status.Dying; // ela começa a morrer
 					}
 				} else {
 					System.out.println("Você ja usou seu poder, bobalhão!");
@@ -53,6 +66,10 @@ public class Torturador extends Pessoa {
 		}
 	}
 	
+	/**
+	 * Executa o menu para torturar ou cancelar após escolher alguém
+	 * @param alvo: pessoa escolhida
+	 */
 	public void menu(Pessoa alvo) {
 		System.out.println("[1] - Torturar\n[0] - Cancelar");
 		int opc = 1;
@@ -71,6 +88,9 @@ public class Torturador extends Pessoa {
 		}
 	}
 
+	/**
+	 * Da um resumo do cargo e explica o que o jogador deve fazer
+	 */
 	@Override
 	public String cargoResumo() {
 		return "Você agora é um Torturador\n"

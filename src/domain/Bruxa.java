@@ -1,18 +1,24 @@
+// classe que gerencia a bruxa (vilã) do jogo
 package domain;
 
 public class Bruxa extends Pessoa{
-	protected boolean usedPowerTonight;
-	protected boolean tonta;
+	protected boolean usedPowerTonight; // verifica se ela já usou o poder (esta noite)
+	protected boolean tonta; // verifica se ela está tonta
 	
 	public Bruxa() {
-		super();
-		this.usedPowerTonight = false;
-		this.tonta = false;
-		this.cargo = "Bruxa";
+		super(); // herda de pessoa
+		this.usedPowerTonight = false; // inicia sem ter usado o poder
+		this.tonta = false; // inicia sem estr tonta
+		this.cargo = "Bruxa"; // define o cargo
+		
+		// define as mensagens de morte
 		this.deathMessages = new String[8];
 		defineDeathMessages();
 	}
 
+	/**
+	 * Define as mensagens de morte com base em um array de strings
+	 */
 	@Override
 	public void defineDeathMessages() {
 		deathMessages[0] = "Pois a Noite é Escura e Cheia de Terrores.";
@@ -25,21 +31,31 @@ public class Bruxa extends Pessoa{
 		deathMessages[7] = "Queimar... não mudará nada... a noite continua escura...";
 	}
 	
+	/**
+	 * Retorna nome, status e cargo do jogador
+	 */
 	@Override
 	public String toString() {
 		return "Nome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + cargo;
 	}
 	
+	/**
+	 * Mata um alvo específico
+	 * @param alvo: pessoa que será morta
+	 */
 	public void killSomeone(Pessoa alvo) {
-		if(!this.equals(alvo)) {
-			if(alvo.status != Status.Dead) {
-				if(this.usedPowerTonight == false) {
-					usedPowerTonight = true;
+		if(!this.equals(alvo)) { // se não for uma tentativa de suicídio
+			if(alvo.status != Status.Dead) { // se o alvo não estiver morto
+				if(this.usedPowerTonight == false) { // se não usou o poder essa noite
+					usedPowerTonight = true; //
+					
 					System.out.println("Você agarra " + alvo.nome + " pelo pescoço e o joga em uma piscina de ácido.");
-					if(!(alvo.status == Status.Blessed)) {
-						alvo.status = Status.Dying;
-						if(alvo instanceof Leproso) {
-							tonta = true;
+					
+					if(!(alvo.status == Status.Blessed)) { // se não estiver abençoado
+						alvo.status = Status.Dying; // vai ficar morrendo
+					
+						if(alvo instanceof Leproso) { // e caso seja um leproso
+							tonta = true; // a bruxa fica tonta
 						}
 					}
 				} else {
@@ -53,6 +69,10 @@ public class Bruxa extends Pessoa{
 		}
 	}
 	
+	/**
+	 * Verifica se realmente vai matar ou cancelar
+	 * @param alvo: pessoa que vai se lascar
+	 */
 	public void menu(Pessoa alvo) {
 		System.out.println("[1] - Matar\n[0] - Cancelar");
 		int opc = 1;
@@ -71,6 +91,9 @@ public class Bruxa extends Pessoa{
 		}
 	}
 
+	/**
+	 * Da um resumo do cargo e especifica o que o jogador deve fazer
+	 */
 	@Override
 	public String cargoResumo() {
 		return "Você é um(a) Bruxo(a)\n"

@@ -1,18 +1,25 @@
 package domain;
 
 public class Filha extends Pessoa {
+	protected Detetive pai; // a filha tem um pai que é um detetive
 	
-	protected Detetive pai;
-	
+	/**
+	 * Construtor de filhas
+	 */
 	public Filha() {
-		super();
-		this.cargo = "Filha do Detetive";
+		super(); // herda de pessoa
+		this.cargo = "Filha do Detetive"; // define o cargo
+		
+		// define as mensagens de morte
 		this.deathMessages = new String[8];
-		if(this.pai != null) {
+		if(this.pai != null) { // verifica se ela tem pai
 			defineDeathMessages();
 		}
 	}
 	
+	/**
+	 * Define as mensagens de morte
+	 */
 	@Override
 	public void defineDeathMessages() {
 		deathMessages[0] = "Detetive fala: Eles juraram...";
@@ -25,15 +32,25 @@ public class Filha extends Pessoa {
 		deathMessages[7] = "Queria ter dito adeus, papai...";
 	}
 	
+	/**
+	 * Retorna nome, status, cargo e pai do jogador
+	 */
 	@Override
 	public String toString() {
 		return "Nome: " + nome + "\nStatus: " + status.getRelatorio() + "\nCargo: " + this.cargo + "\nPai nome: " + pai.getNome();
 	}
 	
+	/**
+	 * Define quem o pai da filha
+	 * @param pai: pai da filha
+	 */
 	protected void defineDad(Detetive pai) {
 		this.pai = pai;
 	}
 
+	/**
+	 * Da um resumo do que o jogador pode fazer
+	 */
 	@Override
 	public String cargoResumo() {
 		return "Você é a Filha do Detetive\n"
