@@ -25,8 +25,8 @@ public class Config {
 	 * @return string com a introdução do jogo
 	 */
 	private String getIntroducao() {
-		return "Neste jogo o vilão é a bruxa, até o momento, não contaremos nada sobre oque cada classe faz,\n"
-			 + "porém, cada pessoa receberá um resumo sobre como sua classe funcionará, peço que falem apenas\n"
+		return "Neste lugar o vilão é a bruxa, até o momento, não contarei nada sobre oque cada classe faz,\n"
+			 + "porém, cada um receberá um resumo sobre como sua classe funcionará, peço que falem apenas\n"
 			 + "no turno da noite, e outro aviso, os Aldeões, que são os \"Inocentes\" também receberão tarefas\n"
 			 + "a noite, mas peço para que nenhum conte oque é, na segunda rodadas explicaremos como todas as\n"
 			 + "categorias funcionam, então é isso, boa sorte a todos.";
@@ -245,13 +245,13 @@ public class Config {
 	 */
 	public void startGame() {
 		// introdução e inicio do jogo
-		System.out.println("Bem Vindo a Aldeia");
+		System.out.println("Olá viajante, Bem Vindo a Aldeia");
 		System.out.println(getIntroducao());
 		System.out.print("Defina a quantia de jogadores: ");
 		int pessoasLength = input.nextInt();
 		
 		if(pessoasLength <= 4) { // não da jogo (pouca gente)
-			System.out.println("Vai ter nem graça com esse tanto de gente\nvá pra casa vá.");
+			System.out.println("Receio que não será interessante se só há vocês... \nvá embora.");
 		} 
 		else if (pessoasLength <= 8) { // agora da jogo
 			this.pessoas = new Pessoa[pessoasLength];
@@ -291,14 +291,14 @@ public class Config {
 							   + "\"Uma Justa Injustiça\""
 							   + "\n"
 							   + "\n"
-							     + "VOCÊS QUEIMARAM A BRUXA. CONSEQUISTES AGRADAR AO VOSSO DEUS?\n"
+							     + "VOCÊS QUEIMARAM A BRUXA. CONSEGUISTES AGRADAR AO VOSSO DEUS?\n"
 							     + "Filha: Jamais voltara os vossos olhos aos céus novamente.\n"
-							     + "Detetive ou Torturador: Não mais houvera bons-dias, não mais houvera risos,não mais houvera\n"
+							     + "Detetive/Torturador: Não mais houvera bons-dias, não mais houvera risos,não mais houvera\n"
 							     + "piadas bobas. Aquilo que mais amará, agora é apenas uma lembrança desbotada. Vossa morada\n"
 							     + "não mais jaz aquecida.\n"
-							     + "Leproso: Sem as medicações do botânico, sucumbirá antes do alvorecer da primareva.\n"
+							     + "Leproso: Sem as medicações do falecido botânico, sucumbirá antes do alvorecer da primareva.\n"
 							     + "Padre: Certamente ALGUM Deus está convosco.\n"
-							     + "Aldeões: Graças a Deus, de volta ao inferno. Marcadod por pecados, jamais inteiros. Em\n"
+							     + "Aldeões: Graças a Deus, de volta ao inferno. Marcados por pecados, jamais inteiros. Em\n"
 							     + "dívida com os que ja foram, cobrai aqueles que dormem.");
 				
 			} else // caso morrerem
@@ -306,7 +306,12 @@ public class Config {
 						   + "\"Uma Justa Injustiça\""
 						   + "\n"
 						   + "\n"
-						     + "VOCÊS SUCUMBIRAM PARA A BRUXA.");
+						   + "\n"
+						     + "VOCÊS SUCUMBIRAM PARA A BRUXA."
+					 	  + "\n"
+					 	  + "\n"
+					 	  + "\n"
+						  	 + "Sinto muito...");
 		}
 	}
 }
